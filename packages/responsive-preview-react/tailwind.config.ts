@@ -5,7 +5,7 @@ import {
 } from "tailwindcss-scoped-preflight";
 
 export default {
-  prefix: "el-",
+  prefix: "rpr-",
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
