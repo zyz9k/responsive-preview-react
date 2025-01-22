@@ -1,18 +1,18 @@
 {
-  "name": "@rcls/elements",
+  "name": "@locospec/responsive-preview-react",
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.3.0",
+  "version": "0.0.0",
   "type": "module",
   "exports": {
     ".": {
       "types": "./dist/lib/main.d.ts",
       "default": "./dist/main.js"
     },
-    "./elements.css": {
-      "require": "./dist/assets/elements.css",
-      "default": "./dist/assets/elements.css"
+    "./styles.css": {
+      "require": "./dist/assets/react-preview.css",
+      "default": "./dist/assets/react-preview.css"
     }
   },
   "files": [
