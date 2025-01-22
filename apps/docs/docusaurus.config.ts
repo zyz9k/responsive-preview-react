@@ -10,7 +10,7 @@ const BASE_URL =
     : "/";
 
 const config: Config = {
-  title: "My Site",
+  title: "responsive-preview-react",
   tagline: "Dinosaurs are cool",
   favicon: "img/favicon.ico",
 
