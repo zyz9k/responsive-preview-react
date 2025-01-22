@@ -1,3 +1,3 @@
 import "../index.css";
-export { Button } from "./Button";
-export { Badge } from "./Badge";
+export { IFramePreview } from "./IFramePreview";
+export { ChildPreview } from "./ChildPreview";

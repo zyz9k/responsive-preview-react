@@ -5,6 +5,7 @@ import { execSync } from "child_process";
 import { extname, relative, resolve } from "path";
 import { fileURLToPath } from "node:url";
 import { glob } from "glob";
+import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -20,6 +21,11 @@ export default defineConfig({
       tsconfigPath: resolve(__dirname, "tsconfig.lib.json"),
     }),
   ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./lib"),
+    },
+  },
   build: {
     copyPublicDir: false,
     lib: {
