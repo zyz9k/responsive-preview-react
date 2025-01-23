@@ -9,6 +9,18 @@ interface BreakpointMarkerProps {
   isDull?: boolean;
 }
 
+interface ScaleBarProps {
+  maxWidth: number;
+  currentBreakpoint?: string;
+  breakpoints: Breakpoint[];
+}
+
+interface SignProps {
+  position?: number;
+  isCurrent?: boolean;
+  isDull?: boolean;
+}
+
 function Marker({
   label,
   sublabel,
@@ -27,20 +39,77 @@ function Marker({
     >
       <span>{label}</span>
       <span>{sublabel}</span>
-      <div
-        className={cn(
-          "rpr-h-4 rpr-w-px rpr-bg-gray-400",
-          isCurrent && "rpr-bg-gray-600"
-        )}
+    </div>
+  );
+}
+
+function LabelScale({
+  maxWidth,
+  currentBreakpoint,
+  breakpoints,
+}: ScaleBarProps) {
+  return (
+    <div className="rpr-relative rpr-w-full rpr-h-8">
+      <Marker label="0" sublabel="0rem" isDull />
+
+      {breakpoints
+        .filter((breakpoint) => breakpoint.show)
+        .map((breakpoint: Breakpoint) => (
+          <Marker
+            key={breakpoint.title}
+            label={breakpoint.title}
+            sublabel={`${breakpoint.minWidthPx}px`}
+            position={breakpoint.minWidthPx}
+            isCurrent={currentBreakpoint === breakpoint.title}
+          />
+        ))}
+
+      <Marker
+        label="max"
+        sublabel={`${maxWidth}px`}
+        position={maxWidth}
+        isDull
       />
     </div>
   );
 }
 
-interface ScaleBarProps {
-  maxWidth: number;
-  currentBreakpoint?: string;
-  breakpoints: Breakpoint[];
+function Sign({ position, isCurrent, isDull = false }: SignProps) {
+  return (
+    <div
+      className={cn(
+        "rpr-absolute rpr-h-full rpr-border-l rpr-border-gray-300",
+        isCurrent && "rpr-font-bold",
+        isDull && "rpr-opacity-50"
+      )}
+      style={position !== undefined ? { left: `${position}px` } : undefined}
+    />
+  );
+}
+
+function SignScale({
+  maxWidth,
+  currentBreakpoint,
+  breakpoints,
+}: ScaleBarProps) {
+  return (
+    <div className="rpr-relative rpr-w-full rpr-h-4">
+      <div className="rpr-absolute rpr-top-1/2 rpr-w-full rpr-border-t rpr-border-gray-300" />
+      <Sign isDull />
+
+      {breakpoints
+        .filter((breakpoint) => breakpoint.show)
+        .map((breakpoint: Breakpoint) => (
+          <Sign
+            key={breakpoint.title}
+            position={breakpoint.minWidthPx}
+            isCurrent={currentBreakpoint === breakpoint.title}
+          />
+        ))}
+
+      <Sign position={maxWidth} isDull />
+    </div>
+  );
 }
 
 export function ScaleBar({
@@ -49,31 +118,20 @@ export function ScaleBar({
   breakpoints,
 }: ScaleBarProps) {
   return (
-    <div className="rpr-relative rpr-w-full rpr-h-10">
-      <div className="rpr-w-full rpr-relative">
-        <Marker label="0" sublabel="0rem" isDull />
+    <>
+      <div className="rpr-grid rpr-gap-1">
+        <LabelScale
+          maxWidth={maxWidth}
+          currentBreakpoint={currentBreakpoint}
+          breakpoints={breakpoints}
+        />
 
-        {breakpoints
-          .filter((breakpoint) => breakpoint.show)
-          .map((breakpoint: Breakpoint) => (
-            <Marker
-              key={breakpoint.title}
-              label={breakpoint.title}
-              sublabel={`${breakpoint.minWidthPx}px`}
-              position={breakpoint.minWidthPx}
-              isCurrent={currentBreakpoint === breakpoint.title}
-            />
-          ))}
-
-        <Marker
-          label="max"
-          sublabel={`${maxWidth}px`}
-          position={maxWidth}
-          isDull
+        <SignScale
+          maxWidth={maxWidth}
+          currentBreakpoint={currentBreakpoint}
+          breakpoints={breakpoints}
         />
       </div>
-
-      <div className="rpr-absolute rpr-top-0 rpr-h-10 rpr-w-full rpr-border-b rpr-border-gray-300" />
-    </div>
+    </>
   );
 }

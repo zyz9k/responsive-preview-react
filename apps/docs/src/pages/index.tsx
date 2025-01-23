@@ -9,6 +9,7 @@ import { ChildPreview } from "@locospec/responsive-preview-react";
 import ContainerQueryCardModern from "@site/src/components/ContainerQueryCardModern";
 
 import styles from "./index.module.css";
+import YouTubeVideoLoop from "../components/YoutubeVideoLoop";
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();

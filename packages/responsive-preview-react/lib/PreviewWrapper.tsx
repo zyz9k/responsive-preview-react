@@ -59,32 +59,34 @@ export function PreviewWrapper({
   const currentBreakpoint = getBreakpoint(width, breakpoints);
 
   return (
-    <div className="twp rpr-grid rpr-w-full rpr-gap-4 rpr-p-8 rpr-bg-white rpr-rounded-md">
-      <Toolbar
-        width={width}
-        maxWidth={maxWidth}
-        breakpointTitle={currentBreakpoint?.title}
-        availableBreakpoints={availableBreakpoints}
-        onBreakpointChange={(value) => {
-          if (resizablePanelRef?.current) {
-            resizablePanelRef.current.resize(parseInt(value));
-          }
-        }}
-      />
+    <div className="twp">
+      <div className="rpr-grid rpr-w-full rpr-gap-4 rpr-p-8 rpr-bg-white dark:rpr-bg-gray-900 rpr-rounded-md rpr-text-gray-800">
+        <Toolbar
+          width={width}
+          maxWidth={maxWidth}
+          breakpointTitle={currentBreakpoint?.title}
+          availableBreakpoints={availableBreakpoints}
+          onBreakpointChange={(value) => {
+            if (resizablePanelRef?.current) {
+              resizablePanelRef.current.resize(parseInt(value));
+            }
+          }}
+        />
 
-      <ScaleBar
-        maxWidth={maxWidth}
-        currentBreakpoint={currentBreakpoint?.title}
-        breakpoints={availableBreakpoints}
-      />
+        <ScaleBar
+          maxWidth={maxWidth}
+          currentBreakpoint={currentBreakpoint?.title}
+          breakpoints={availableBreakpoints}
+        />
 
-      <PreviewPanel
-        panelRef={resizablePanelRef}
-        contentRef={panelContentRef}
-        className={className}
-      >
-        {children}
-      </PreviewPanel>
+        <PreviewPanel
+          panelRef={resizablePanelRef}
+          contentRef={panelContentRef}
+          className={className}
+        >
+          {children}
+        </PreviewPanel>
+      </div>
     </div>
   );
 }
