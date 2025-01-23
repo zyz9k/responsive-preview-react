@@ -6,6 +6,7 @@ interface BreakpointMarkerProps {
   sublabel: string;
   position?: number;
   isCurrent?: boolean;
+  isDull?: boolean;
 }
 
 function Marker({
@@ -13,22 +14,25 @@ function Marker({
   sublabel,
   position,
   isCurrent,
+  isDull = false,
 }: BreakpointMarkerProps) {
   return (
     <div
       className={cn(
-        "rpr-absolute rpr-flex rpr-flex-col rpr-items-center rpr-translate-x-[-50%]",
-        isCurrent && "rpr-font-bold"
+        "rpr-absolute rpr-flex rpr-flex-col rpr-items-center rpr-translate-x-[-50%] rpr-text-gray-600 rpr-text-xs whitespace-nowrap",
+        isCurrent && "rpr-font-bold",
+        isDull && "rpr-opacity-50"
       )}
       style={position !== undefined ? { left: `${position}px` } : undefined}
     >
-      <span className="rpr-text-xs rpr-text-gray-600 whitespace-nowrap">
-        {label}
-      </span>
-      <span className="rpr-text-xs rpr-text-gray-600 whitespace-nowrap">
-        {sublabel}
-      </span>
-      <div className="rpr-h-4 rpr-w-px rpr-bg-gray-400" />
+      <span>{label}</span>
+      <span>{sublabel}</span>
+      <div
+        className={cn(
+          "rpr-h-4 rpr-w-px rpr-bg-gray-400",
+          isCurrent && "rpr-bg-gray-600"
+        )}
+      />
     </div>
   );
 }
@@ -47,7 +51,7 @@ export function ScaleBar({
   return (
     <div className="rpr-relative rpr-w-full rpr-h-10">
       <div className="rpr-w-full rpr-relative">
-        <Marker label="0" sublabel="0rem" />
+        <Marker label="0" sublabel="0rem" isDull />
 
         {breakpoints
           .filter((breakpoint) => breakpoint.show)
@@ -61,10 +65,15 @@ export function ScaleBar({
             />
           ))}
 
-        <Marker label="max" sublabel={`${maxWidth}px`} position={maxWidth} />
+        <Marker
+          label="max"
+          sublabel={`${maxWidth}px`}
+          position={maxWidth}
+          isDull
+        />
       </div>
 
-      <div className="rpr-absolute rpr-top-0 rpr-h-9 rpr-w-full rpr-border-b rpr-border-gray-300" />
+      <div className="rpr-absolute rpr-top-0 rpr-h-10 rpr-w-full rpr-border-b rpr-border-gray-300" />
     </div>
   );
 }
