@@ -68,9 +68,12 @@ export function PreviewWrapper({
 
   const availableBreakpoints = React.useMemo(() => {
     return breakpoints.map((breakpoint: Breakpoint) => {
-      breakpoint.percentage = Math.ceil(
-        (breakpoint.minWidthPx * 100) / maxWidth
-      );
+      // breakpoint.percentage = Math.ceil(
+      //   (breakpoint.minWidthPx * 100) / maxWidth
+      // );
+
+      breakpoint.percentage = (breakpoint.minWidthPx * 100) / maxWidth;
+
       if (breakpoint.percentage > 100) {
         breakpoint.percentage = 100;
         breakpoint.show = false;
@@ -100,8 +103,9 @@ export function PreviewWrapper({
                 breakpointTitle={currentBreakpoint?.title}
                 availableBreakpoints={availableBreakpoints}
                 onBreakpointChange={(value) => {
+                  console.log("value", value, parseFloat(value));
                   if (resizablePanelRef?.current) {
-                    resizablePanelRef.current.resize(parseInt(value));
+                    resizablePanelRef.current.resize(parseFloat(value));
                   }
                 }}
               />
