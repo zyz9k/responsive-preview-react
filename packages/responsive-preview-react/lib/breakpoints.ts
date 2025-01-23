@@ -10,21 +10,25 @@ import {
   Tablet,
   TabletSmartphone,
   Tv,
-  type LucideProps,
 } from "lucide-react";
 
-export interface Breakpoint {
+interface IconProps {
+  className?: string;
+}
+
+export interface BreakpointConfig {
   title: string;
   minWidthRem: number;
   minWidthPx: number;
-  percentage?: number;
-  show?: boolean;
-  icon: React.ForwardRefExoticComponent<
-    Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
-  >;
+  icon: React.ComponentType<IconProps>;
 }
 
-export const breakpoints: Breakpoint[] = [
+export interface Breakpoint extends BreakpointConfig {
+  percentage?: number;
+  show?: boolean;
+}
+
+export const defaultBreakpoints: BreakpointConfig[] = [
   {
     title: "xxs",
     minWidthRem: 5,
@@ -99,13 +103,26 @@ export const breakpoints: Breakpoint[] = [
   },
 ];
 
-export function getBreakpoint(currentWidth: number): Breakpoint | undefined {
-  // Sort breakpoints from largest to smallest
-  const sortedBreakpoints = [...breakpoints].sort(
+// export function getBreakpoint(currentWidth: number): Breakpoint | undefined {
+//   // Sort breakpoints from largest to smallest
+//   const sortedBreakpoints = [...breakpoints].sort(
+//     (a, b) => b.minWidthPx - a.minWidthPx
+//   );
+
+//   // Find the first (largest) breakpoint where the current width is greater than or equal to its minimum
+//   return sortedBreakpoints.find(
+//     (breakpoint) => currentWidth >= breakpoint.minWidthPx
+//   );
+// }
+
+export function getBreakpoint(
+  currentWidth: number,
+  customBreakpoints: BreakpointConfig[] = defaultBreakpoints
+): Breakpoint | undefined {
+  const sortedBreakpoints = [...customBreakpoints].sort(
     (a, b) => b.minWidthPx - a.minWidthPx
   );
 
-  // Find the first (largest) breakpoint where the current width is greater than or equal to its minimum
   return sortedBreakpoints.find(
     (breakpoint) => currentWidth >= breakpoint.minWidthPx
   );

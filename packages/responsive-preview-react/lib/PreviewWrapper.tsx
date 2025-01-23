@@ -1,8 +1,8 @@
 "use client";
 import * as React from "react";
 import { ImperativePanelHandle } from "react-resizable-panels";
-import { breakpoints, getBreakpoint } from "./breakpoints";
-import type { Breakpoint } from "./breakpoints";
+import { defaultBreakpoints, getBreakpoint } from "./breakpoints";
+import type { Breakpoint, BreakpointConfig } from "./breakpoints";
 import { Toolbar } from "./components/Toolbar";
 import { ScaleBar } from "./components/ScaleBar";
 import { PreviewPanel } from "./components/PreviewPanel";
@@ -10,9 +10,14 @@ import { PreviewPanel } from "./components/PreviewPanel";
 interface PreviewWrapperProps {
   children?: React.ReactNode;
   className?: string;
+  breakpoints?: BreakpointConfig[];
 }
 
-export function PreviewWrapper({ children, className }: PreviewWrapperProps) {
+export function PreviewWrapper({
+  children,
+  className,
+  breakpoints = defaultBreakpoints,
+}: PreviewWrapperProps) {
   const resizablePanelRef = React.useRef<ImperativePanelHandle>(null);
   const [width, setWidth] = React.useState<number>(0);
   const [maxWidth, setMaxWidth] = React.useState<number>(0);
@@ -49,9 +54,9 @@ export function PreviewWrapper({ children, className }: PreviewWrapperProps) {
       }
       return breakpoint;
     });
-  }, [maxWidth]);
+  }, [maxWidth, breakpoints]);
 
-  const currentBreakpoint = getBreakpoint(width);
+  const currentBreakpoint = getBreakpoint(width, breakpoints);
 
   return (
     <div className="twp rpr-grid rpr-w-full rpr-gap-2 rpr-p-4 rpr-bg-red-50">

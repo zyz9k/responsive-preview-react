@@ -9,6 +9,7 @@ import {
 } from "@locospec/responsive-preview-react";
 import ContainerQuerySample from "@site/src/components/ContainerQuerySample";
 import ContainerQueryCard from "@site/src/components/ContainerQueryCard";
+import { DoorClosedIcon, Tablet, Tv } from "lucide-react";
 
 # Elements Demo
 
@@ -21,6 +22,33 @@ Welcome to Element Demo! We have some components published and we are using docu
 ## Obligatory Badge
 
 <Badge>I am a badge</Badge>
+
+## ChildPreview - Custom Breakpoints
+
+<ChildPreview
+  breakpoints={[
+    {
+      title: "xxs",
+      minWidthRem: 5,
+      minWidthPx: 80,
+      icon: DoorClosedIcon,
+    },
+    {
+      title: "md",
+      minWidthRem: 28,
+      minWidthPx: 448,
+      icon: Tablet,
+    },
+    {
+      title: "2xl",
+      minWidthRem: 42,
+      minWidthPx: 672,
+      icon: Tv,
+    },
+  ]}
+>
+  <ContainerQueryCard />
+</ChildPreview>
 
 ## IFramePreview
 
