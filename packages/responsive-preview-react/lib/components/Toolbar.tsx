@@ -10,7 +10,7 @@ import {
 } from "@/base/components/ui/toggle-group";
 import { Fullscreen, Pause, Play } from "lucide-react";
 import type { Breakpoint } from "../breakpoints";
-import React from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 interface ToolbarProps {
   width: number;
@@ -27,33 +27,54 @@ export function Toolbar({
   availableBreakpoints,
   onBreakpointChange,
 }: ToolbarProps) {
-  const [isPlaying, setIsPlaying] = React.useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout>();
 
-  const play = React.useCallback(
-    (intervalMs: number, onChange: (value: string) => void) => {
-      let index = 0;
+  const play = useCallback(() => {
+    let index = 0;
+    const breakpoints = availableBreakpoints.filter((bp) => bp.show);
 
-      const start = () => {
-        const breakpoints = availableBreakpoints.filter((bp) => bp.show);
-        return setInterval(() => {
-          const bp = breakpoints[index];
-          onChange(bp?.percentage?.toString() || "100");
-          index = (index + 1) % breakpoints.length;
-        }, intervalMs);
-      };
+    const start = () => {
+      intervalRef.current = setInterval(() => {
+        const bp = breakpoints[index];
+        onBreakpointChange(bp?.percentage?.toString() || "100");
+        //index = (index + 1) % breakpoints.length;
+        index++;
 
-      return { start };
-    },
-    [availableBreakpoints]
-  );
+        if (index >= breakpoints.length) {
+          stop();
+          setIsPlaying(false);
+        }
+      }, 1000);
+    };
 
-  // React.useEffect(() => {
-  //   let interval: NodeJS.Timeout;
-  //   if (isPlaying) {
-  //     interval = play(500, onBreakpointChange).start();
-  //   }
-  //   return () => clearInterval(interval);
-  // }, [isPlaying, play, onBreakpointChange]);
+    const stop = () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = undefined;
+      }
+    };
+
+    return { start, stop };
+  }, [availableBreakpoints, onBreakpointChange]);
+
+  const togglePlay = () => {
+    const player = play();
+    if (!isPlaying) {
+      player.start();
+    } else {
+      player.stop();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div className="rpr-grow rpr-flex rpr-items-center rpr-justify-between prp-mr-[12px]">
@@ -72,7 +93,7 @@ export function Toolbar({
           >
             <ToggleGroupItem
               value="play"
-              onClick={() => setIsPlaying(!isPlaying)}
+              onClick={togglePlay}
               className="rpr-h-[22px] rpr-w-[22px] rpr-min-w-0 rpr-rounded-sm rpr-p-0"
             >
               <Tooltip>
