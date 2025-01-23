@@ -1,18 +1,21 @@
 "use client";
 import type { BreakpointConfig } from "@/breakpoints";
 import { PreviewWrapper } from "../PreviewWrapper";
+import type { PreviewConfig } from "../types";
 
 interface IFramePreviewProps {
   srcUrl: string;
   height?: number;
   colorMode: string;
   breakpoints?: BreakpointConfig[];
+  config?: PreviewConfig;
 }
 
 export function IFramePreview({
   srcUrl,
   height,
   breakpoints,
+  config,
 }: IFramePreviewProps) {
   // React.useEffect(() => {
   //   const updateIframeTheme = (theme: string): void => {
@@ -29,7 +32,7 @@ export function IFramePreview({
   // }, [colorMode]);
 
   return (
-    <PreviewWrapper breakpoints={breakpoints}>
+    <PreviewWrapper breakpoints={breakpoints} config={config}>
       <iframe
         allow="cross-origin-isolated"
         src={srcUrl}

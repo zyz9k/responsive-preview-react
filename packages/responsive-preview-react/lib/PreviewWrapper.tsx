@@ -6,18 +6,22 @@ import type { Breakpoint, BreakpointConfig } from "./breakpoints";
 import { Toolbar } from "./components/Toolbar";
 import { ScaleBar } from "./components/ScaleBar";
 import { PreviewPanel } from "./components/PreviewPanel";
+import type { PreviewConfig } from "./types";
 
 interface PreviewWrapperProps {
   children?: React.ReactNode;
   className?: string;
   breakpoints?: BreakpointConfig[];
+  config?: PreviewConfig;
 }
 
 export function PreviewWrapper({
   children,
   className,
   breakpoints = defaultBreakpoints,
+  config = {},
 }: PreviewWrapperProps) {
+  const { showToolbar = true, showScale = true, scaleConfig } = config;
   const resizablePanelRef = React.useRef<ImperativePanelHandle>(null);
   const [width, setWidth] = React.useState<number>(0);
   const [maxWidth, setMaxWidth] = React.useState<number>(0);
@@ -61,23 +65,28 @@ export function PreviewWrapper({
   return (
     <div className="twp">
       <div className="rpr-grid rpr-w-full rpr-gap-4 rpr-p-8 rpr-bg-white dark:rpr-bg-gray-900 rpr-rounded-md rpr-text-gray-800">
-        <Toolbar
-          width={width}
-          maxWidth={maxWidth}
-          breakpointTitle={currentBreakpoint?.title}
-          availableBreakpoints={availableBreakpoints}
-          onBreakpointChange={(value) => {
-            if (resizablePanelRef?.current) {
-              resizablePanelRef.current.resize(parseInt(value));
-            }
-          }}
-        />
+        {showToolbar && (
+          <Toolbar
+            width={width}
+            maxWidth={maxWidth}
+            breakpointTitle={currentBreakpoint?.title}
+            availableBreakpoints={availableBreakpoints}
+            onBreakpointChange={(value) => {
+              if (resizablePanelRef?.current) {
+                resizablePanelRef.current.resize(parseInt(value));
+              }
+            }}
+          />
+        )}
 
-        <ScaleBar
-          maxWidth={maxWidth}
-          currentBreakpoint={currentBreakpoint?.title}
-          breakpoints={availableBreakpoints}
-        />
+        {showScale && (
+          <ScaleBar
+            maxWidth={maxWidth}
+            currentBreakpoint={currentBreakpoint?.title}
+            breakpoints={availableBreakpoints}
+            config={scaleConfig}
+          />
+        )}
 
         <PreviewPanel
           panelRef={resizablePanelRef}

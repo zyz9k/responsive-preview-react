@@ -49,7 +49,16 @@ export default function Home(): ReactNode {
       <HomepageHeader />
       <div className="bg-gradient-to-r from-gray-200 to-slate-200">
         <div className="container py-8 lg:py-16 mx-auto drop-shadow-md">
-          <ChildPreview>
+          <ChildPreview
+            config={{
+              showToolbar: true,
+              showScale: true,
+              scaleConfig: {
+                showLabels: true,
+                showSigns: true,
+              },
+            }}
+          >
             <ContainerQueryCardModern />
           </ChildPreview>
         </div>
