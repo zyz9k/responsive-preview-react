@@ -14,18 +14,18 @@ const ContainerQueryCardModern = () => {
   return (
     <div className="@container">
       <div
-        className="flex flex-col p-4 bg-slate-200 dark:bg-slate-800
-          @xs:bg-red-200 @xs:dark:bg-red-800
-          @sm:bg-orange-200 @sm:dark:bg-orange-800
-          @md:bg-yellow-200 @md:dark:bg-yellow-800
-          @lg:bg-green-200 @lg:dark:bg-green-800
-          @xl:bg-teal-200 @xl:dark:bg-teal-800
-          @2xl:bg-cyan-200 @2xl:dark:bg-cyan-800
-          @3xl:bg-blue-200 @3xl:dark:bg-blue-800
-          @4xl:bg-indigo-200 @4xl:dark:bg-indigo-800
-          @5xl:bg-purple-200 @5xl:dark:bg-purple-800
-          @6xl:bg-pink-200 @6xl:dark:bg-pink-800
-          @7xl:bg-rose-200 @7xl:dark:bg-rose-800"
+        className="flex flex-col p-4 bg-slate-200 dark:bg-slate-600
+          @xs:bg-red-200 @xs:dark:bg-red-600
+          @sm:bg-orange-200 @sm:dark:bg-orange-600
+          @md:bg-yellow-200 @md:dark:bg-yellow-600
+          @lg:bg-green-200 @lg:dark:bg-green-600
+          @xl:bg-teal-200 @xl:dark:bg-teal-600
+          @2xl:bg-cyan-200 @2xl:dark:bg-cyan-600
+          @3xl:bg-blue-200 @3xl:dark:bg-blue-600
+          @4xl:bg-indigo-200 @4xl:dark:bg-indigo-600
+          @5xl:bg-purple-200 @5xl:dark:bg-purple-600
+          @6xl:bg-pink-200 @6xl:dark:bg-pink-600
+          @7xl:bg-rose-200 @7xl:dark:bg-rose-600"
       >
         <div
           className="flex flex-col gap-2 
