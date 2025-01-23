@@ -50,7 +50,7 @@ export function Settings({ config, onChange, rprRef }: SettingsProps) {
           <SettingsIcon className="rpr-h-3.5 rpr-w-3.5" />
         </button>
       </PopoverTrigger>
-      <PopoverContent portalRef={rprRef} className="rpr-w-fit">
+      <PopoverContent portalRef={rprRef} className="rpr-w-fit" data-side="top">
         <ToggleGroup
           type="multiple"
           variant="outline"

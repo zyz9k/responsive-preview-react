@@ -43,7 +43,7 @@ function HomepageHeader() {
 function PreviewDemo() {
   const { colorMode, setColorMode } = useColorMode();
   return (
-    <div className="bg-gradient-to-r from-gray-200 to-slate-200 dark:from-gray-700 dark:to-slate-700">
+    <div className="bg-gradient-to-r from-gray-200 to-slate-200 dark:from-gray-800 dark:to-slate-800">
       <div className="container py-8 lg:py-16 mx-auto drop-shadow-md">
         <ChildPreview
           config={{
