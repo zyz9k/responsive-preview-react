@@ -22,7 +22,7 @@ export function PreviewWrapper({ children, className }: PreviewWrapperProps) {
     if (width > maxWidth) {
       setMaxWidth(width);
     }
-  }, [width]);
+  }, [width, maxWidth]);
 
   React.useEffect(() => {
     if (!panelContentRef.current) return;
