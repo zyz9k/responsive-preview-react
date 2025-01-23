@@ -7,6 +7,7 @@ import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import Heading from "@theme/Heading";
 import { ChildPreview } from "@locospec/responsive-preview-react";
 import ContainerQueryCardModern from "@site/src/components/ContainerQueryCardModern";
+import { useColorMode } from "@docusaurus/theme-common";
 
 import styles from "./index.module.css";
 import YouTubeVideoLoop from "../components/YoutubeVideoLoop";
@@ -15,7 +16,7 @@ function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
     <header className={clsx("hero hero--primary", styles.heroBanner)}>
-      <div className="container py-8 lg:py-16">
+      <div className="container">
         <Heading
           as="h1"
           className="hero__title mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight sm:text-7xl"
@@ -39,30 +40,39 @@ function HomepageHeader() {
   );
 }
 
+function PreviewDemo() {
+  const { colorMode, setColorMode } = useColorMode();
+  return (
+    <div className="bg-gradient-to-r from-gray-200 to-slate-200 dark:from-gray-700 dark:to-slate-700">
+      <div className="container py-8 lg:py-16 mx-auto drop-shadow-md">
+        <ChildPreview
+          config={{
+            darkMode: colorMode === "dark" ? true : false,
+            showToolbar: true,
+            showScale: true,
+            scaleConfig: {
+              showLabels: true,
+              showSigns: true,
+            },
+          }}
+        >
+          <ContainerQueryCardModern />
+        </ChildPreview>
+      </div>
+    </div>
+  );
+}
+
 export default function Home(): ReactNode {
   const { siteConfig } = useDocusaurusContext();
+
   return (
     <Layout
       title={`${siteConfig.title}`}
       description="Description will go into a meta tag in <head />"
     >
       <HomepageHeader />
-      <div className="bg-gradient-to-r from-gray-200 to-slate-200">
-        <div className="container py-8 lg:py-16 mx-auto drop-shadow-md">
-          <ChildPreview
-            config={{
-              showToolbar: true,
-              showScale: true,
-              scaleConfig: {
-                showLabels: true,
-                showSigns: true,
-              },
-            }}
-          >
-            <ContainerQueryCardModern />
-          </ChildPreview>
-        </div>
-      </div>
+      <PreviewDemo />
       <main>
         <HomepageFeatures />
       </main>

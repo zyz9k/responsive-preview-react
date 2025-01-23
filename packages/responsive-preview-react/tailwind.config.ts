@@ -7,6 +7,7 @@ import animate from "tailwindcss-animate";
 
 export default {
   prefix: "rpr-",
+  darkMode: ["class"],
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",

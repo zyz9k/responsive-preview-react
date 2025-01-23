@@ -27,7 +27,7 @@ export function Toolbar({
   onBreakpointChange,
 }: ToolbarProps) {
   return (
-    <div className="rpr-flex rpr-items-center rpr-justify-between prp-mr-[12px]">
+    <div className="rpr-grow rpr-flex rpr-items-center rpr-justify-between prp-mr-[12px]">
       <div className="rpr-py-2 rpr-text-xs">
         Width: {width}px ({Math.round((width / maxWidth) * 100)}%)
         {breakpointTitle ? `[${breakpointTitle}]` : ""}

@@ -25,7 +25,7 @@ const ContainerQueryCardModern = () => {
           @4xl:bg-indigo-200 
           @5xl:bg-purple-200 
           @6xl:bg-pink-200 
-          @7xl:bg-rose-200"
+          @7xl:bg-rose-200 @7xl:dark:bg-rose-800"
       >
         {/* Header Section */}
         <div

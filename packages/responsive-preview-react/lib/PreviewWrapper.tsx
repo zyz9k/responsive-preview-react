@@ -7,6 +7,8 @@ import { Toolbar } from "./components/Toolbar";
 import { ScaleBar } from "./components/ScaleBar";
 import { PreviewPanel } from "./components/PreviewPanel";
 import type { PreviewConfig } from "./types";
+import { Settings } from "./components/Settings";
+import { cn } from "./base/lib/utils";
 
 interface PreviewWrapperProps {
   children?: React.ReactNode;
@@ -19,13 +21,32 @@ export function PreviewWrapper({
   children,
   className,
   breakpoints = defaultBreakpoints,
-  config = {},
+  config: initialConfig = {
+    darkMode: false,
+    showToolbar: true,
+    showScale: true,
+    scaleConfig: {
+      showLabels: true,
+      showSigns: true,
+    },
+  },
 }: PreviewWrapperProps) {
-  const { showToolbar = true, showScale = true, scaleConfig } = config;
+  const [config, setConfig] = React.useState<PreviewConfig>(initialConfig);
+  const {
+    darkMode = false,
+    showToolbar = true,
+    showScale = true,
+    scaleConfig,
+  } = config;
   const resizablePanelRef = React.useRef<ImperativePanelHandle>(null);
   const [width, setWidth] = React.useState<number>(0);
   const [maxWidth, setMaxWidth] = React.useState<number>(0);
   const panelContentRef = React.useRef<HTMLDivElement>(null);
+  const rprRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    setConfig(initialConfig);
+  }, [initialConfig]);
 
   React.useEffect(() => {
     if (width > maxWidth) {
@@ -64,37 +85,46 @@ export function PreviewWrapper({
 
   return (
     <div className="twp">
-      <div className="rpr-grid rpr-w-full rpr-gap-4 rpr-p-8 rpr-bg-white dark:rpr-bg-gray-900 rpr-rounded-md rpr-text-gray-800">
-        {showToolbar && (
-          <Toolbar
-            width={width}
-            maxWidth={maxWidth}
-            breakpointTitle={currentBreakpoint?.title}
-            availableBreakpoints={availableBreakpoints}
-            onBreakpointChange={(value) => {
-              if (resizablePanelRef?.current) {
-                resizablePanelRef.current.resize(parseInt(value));
-              }
-            }}
-          />
-        )}
-
-        {showScale && (
-          <ScaleBar
-            maxWidth={maxWidth}
-            currentBreakpoint={currentBreakpoint?.title}
-            breakpoints={availableBreakpoints}
-            config={scaleConfig}
-          />
-        )}
-
-        <PreviewPanel
-          panelRef={resizablePanelRef}
-          contentRef={panelContentRef}
-          className={className}
+      <div className={cn(darkMode && "rpr-dark dark")}>
+        <div
+          className="rpr-grid rpr-w-full rpr-gap-4 rpr-p-8 rpr-bg-gray-50 dark:rpr-bg-gray-900 rpr-rounded-md rpr-text-gray-800 dark:rpr-text-white"
+          ref={rprRef}
         >
-          {children}
-        </PreviewPanel>
+          <div className="rpr-flex rpr-items-center rpr-justify-between">
+            <Settings config={config} onChange={setConfig} rprRef={rprRef} />
+
+            {showToolbar && (
+              <Toolbar
+                width={width}
+                maxWidth={maxWidth}
+                breakpointTitle={currentBreakpoint?.title}
+                availableBreakpoints={availableBreakpoints}
+                onBreakpointChange={(value) => {
+                  if (resizablePanelRef?.current) {
+                    resizablePanelRef.current.resize(parseInt(value));
+                  }
+                }}
+              />
+            )}
+          </div>
+
+          {showScale && (
+            <ScaleBar
+              maxWidth={maxWidth}
+              currentBreakpoint={currentBreakpoint?.title}
+              breakpoints={availableBreakpoints}
+              config={scaleConfig}
+            />
+          )}
+
+          <PreviewPanel
+            panelRef={resizablePanelRef}
+            contentRef={panelContentRef}
+            className={className}
+          >
+            {children}
+          </PreviewPanel>
+        </div>
       </div>
     </div>
   );

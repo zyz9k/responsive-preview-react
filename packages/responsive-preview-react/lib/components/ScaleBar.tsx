@@ -33,7 +33,7 @@ function Marker({
   return (
     <div
       className={cn(
-        "rpr-absolute rpr-flex rpr-flex-col rpr-items-center rpr-translate-x-[-50%] rpr-text-gray-600 rpr-text-xs whitespace-nowrap",
+        "rpr-absolute rpr-flex rpr-flex-col rpr-items-center rpr-translate-x-[-50%] rpr-text-gray-600 dark:rpr-text-gray-200 rpr-text-xs whitespace-nowrap",
         isCurrent && "rpr-font-bold",
         isDull && "rpr-opacity-50"
       )}

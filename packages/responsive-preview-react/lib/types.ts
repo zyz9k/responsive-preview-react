@@ -5,6 +5,7 @@ export interface ScaleConfig {
 }
 
 export interface PreviewConfig {
+  darkMode?: boolean;
   showToolbar?: boolean;
   showScale?: boolean;
   scaleConfig?: ScaleConfig;
