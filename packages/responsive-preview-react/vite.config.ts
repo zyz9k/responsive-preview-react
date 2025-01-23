@@ -13,7 +13,9 @@ export default defineConfig({
     {
       name: "run-tsc",
       buildStart() {
-        execSync("tsc -b ./tsconfig.lib.json");
+        if (process.env.WATCH !== "true") {
+          execSync("tsc -b ./tsconfig.lib.json");
+        }
       },
     },
     react(),
@@ -21,12 +23,23 @@ export default defineConfig({
       tsconfigPath: resolve(__dirname, "tsconfig.lib.json"),
     }),
   ],
+  optimizeDeps: {
+    include: [path.resolve(__dirname, "lib/base")],
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./lib"),
     },
   },
   build: {
+    emptyOutDir: process.env.WATCH !== "true",
+    ...(process.env.WATCH === "true" && {
+      watch: {
+        buildDelay: 100,
+        clearScreen: true,
+        exclude: ["lib/**/*.d.ts", "node_modules/**", "lib/base-1/**/*.tsx"],
+      },
+    }),
     copyPublicDir: false,
     lib: {
       entry: resolve(__dirname, "lib/main.ts"),

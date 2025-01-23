@@ -18,6 +18,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/base/components/ui/tooltip";
+import { cn } from "./base/lib/utils";
+import { Fullscreen } from "lucide-react";
+import { Toolbar } from "./components/Toolbar";
+import { ScaleBar } from "./components/ScaleBar";
 
 interface PreviewWrapperProps {
   children?: React.ReactNode;
@@ -55,79 +59,57 @@ export function PreviewWrapper({ children, className }: PreviewWrapperProps) {
       );
       if (breakpoint.percentage > 100) {
         breakpoint.percentage = 100;
+        breakpoint.show = false;
+      } else {
+        breakpoint.show = true;
       }
       return breakpoint;
     });
   }, [maxWidth]);
 
+  const currentBreakpoint = getBreakpoint(width);
+
   return (
-    <div className="grid w-full gap-4">
-      <div className="flex items-center justify-between mr-[12px]">
-        <div className="py-2 text-xs">
-          Width: {width}px (
-          {resizablePanelRef.current && resizablePanelRef.current.getSize()}%) [
-          {getBreakpoint(width)?.title}]
-        </div>
+    <div className="twp rpr-grid rpr-w-full rpr-gap-2 rpr-p-4 rpr-bg-red-50">
+      <Toolbar
+        width={width}
+        maxWidth={maxWidth}
+        breakpointTitle={currentBreakpoint?.title}
+        availableBreakpoints={availableBreakpoints}
+        onBreakpointChange={(value) => {
+          if (resizablePanelRef?.current) {
+            resizablePanelRef.current.resize(parseInt(value));
+          }
+        }}
+      />
 
-        {/* {JSON.stringify(availableBreakpoints)} */}
-
-        <div className="hidden h-7 items-center gap-1.5 rounded-md border p-[2px] shadow-none lg:flex">
-          <TooltipProvider>
-            <ToggleGroup
-              type="single"
-              defaultValue="100"
-              onValueChange={(value) => {
-                if (resizablePanelRef?.current) {
-                  resizablePanelRef.current.resize(parseInt(value));
-                }
-              }}
-              className="flex items-center"
-            >
-              {availableBreakpoints.map((breakpoint: Breakpoint) => {
-                const Icon = breakpoint.icon;
-                return (
-                  <ToggleGroupItem
-                    data-state={
-                      getBreakpoint(width)?.title === breakpoint.title
-                        ? "on"
-                        : "off"
-                    }
-                    value={breakpoint?.percentage?.toString() || "0"}
-                    key={breakpoint.title}
-                    className="h-[22px] w-[22px] min-w-0 rounded-sm p-0"
-                    title={`${breakpoint.title} (${breakpoint.minWidthPx}px)`}
-                  >
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Icon className="h-3.5 w-3.5" />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>
-                          `${breakpoint.title} (${breakpoint.minWidthPx}px)`
-                        </p>
-                      </TooltipContent>
-                    </Tooltip>
-
-                    {/* <span className="text-xs">{breakpoint.title}</span> */}
-                  </ToggleGroupItem>
-                );
-              })}
-            </ToggleGroup>
-          </TooltipProvider>
-        </div>
-      </div>
+      <ScaleBar
+        width={width}
+        maxWidth={maxWidth}
+        currentBreakpoint={currentBreakpoint?.title}
+        breakpoints={availableBreakpoints}
+      />
 
       <ResizablePanelGroup
         direction="horizontal"
-        className="relative z-10 bg-gray-50"
+        className="rpr-mt-4 rpr-relative rpr-z-10 rpr-rounded-sm rpr-border-0 rpr-border-[#0000001f] rpr-bg-clip-padding rpr-bg-[#0000000f] !rpr-overflow-visible"
+        style={{
+          // backgroundColor: "#0000000f",
+          // backgroundClip: "padding-box",
+          // border: "1px solid #0000001f",
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.2' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E")`,
+        }}
       >
         <ResizablePanel
           ref={resizablePanelRef}
-          className={`border ${className}`}
+          className={`rpr-border ${className}`}
+          defaultSize={100}
+          minSize={20}
         >
           <div ref={panelContentRef}>{children}</div>
         </ResizablePanel>
-        <ResizableHandle className="relative hidden w-3 bg-transparent p-0 after:absolute after:right-0 after:top-1/2 after:h-8 after:w-[6px] after:-translate-y-1/2 after:translate-x-[-1px] after:rounded-full after:bg-border after:transition-all after:hover:h-10 md:block" />
+        <ResizableHandle withHandle className="rpr-z-50 rpr-w-0" />
+        {/* <ResizableHandle className="rpr-relative rpr-hidden rpr-w-3 rpr-bg-transparent rpr-p-0 after:rpr-absolute after:rpr-right-0 after:rpr-top-1/2 after:rpr-h-8 after:rpr-w-[6px] after:-rpr-translate-y-1/2 after:rpr-translate-x-[-3px] after:rpr-rounded-full after:rpr-bg-gray-300 after:rpr-transition-all after:hover:rpr-h-10 md:rpr-block" /> */}
         <ResizablePanel defaultSize={0} minSize={0} />
       </ResizablePanelGroup>
     </div>

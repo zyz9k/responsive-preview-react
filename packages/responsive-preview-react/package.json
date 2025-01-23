@@ -23,7 +23,9 @@
   ],
   "scripts": {
     "dev": "vite",
+    "optimize": "vite optimize --force",
     "build": "vite build",
+    "build:watch": "WATCH=true vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

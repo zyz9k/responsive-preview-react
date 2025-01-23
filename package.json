@@ -12,6 +12,7 @@
     "docs:serve": "lerna run serve --scope apps-docs",
     "docs:deploy": "lerna run deploy --scope apps-docs",
     "package:build": "lerna run build --scope @locospec/responsive-preview-react",
+    "package:watch": "lerna run build:watch --scope @locospec/responsive-preview-react",
     "package:dev": "lerna run dev --scope @locospec/responsive-preview-react"
   },
   "devDependencies": {

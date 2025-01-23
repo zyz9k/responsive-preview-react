@@ -13,19 +13,19 @@ export function IFramePreview({
   height,
   colorMode,
 }: IFramePreviewProps) {
-  React.useEffect(() => {
-    const updateIframeTheme = (theme: string): void => {
-      const iframe = document.querySelector("iframe");
-      if (iframe && iframe.contentDocument) {
-        iframe.contentDocument.documentElement.setAttribute(
-          "data-theme",
-          theme
-        );
-      }
-    };
+  // React.useEffect(() => {
+  //   const updateIframeTheme = (theme: string): void => {
+  //     const iframe = document.querySelector("iframe");
+  //     if (iframe && iframe.contentDocument) {
+  //       iframe.contentDocument.documentElement.setAttribute(
+  //         "data-theme",
+  //         theme
+  //       );
+  //     }
+  //   };
 
-    updateIframeTheme(colorMode);
-  }, [colorMode]);
+  //   updateIframeTheme(colorMode);
+  // }, [colorMode]);
 
   return (
     <PreviewWrapper>
@@ -33,7 +33,7 @@ export function IFramePreview({
         allow="cross-origin-isolated"
         src={srcUrl}
         height={height || 930}
-        className="relative z-20 hidden w-full bg-background md:block"
+        className="rpr-relative rpr-z-20 rpr-hidden rpr-w-full rpr-bg-black-50 md:rpr-block"
       />
     </PreviewWrapper>
   );

@@ -111,3 +111,7 @@ This would release your docs site with new button color
 ### Read More
 
 Check out the article that goes into the depth of how this repo has been set up and understand the nitty-gritty details.
+
+```
+code2prompt packages/responsive-preview-react/lib --output=claude.txt --tokens
+```

@@ -37,6 +37,18 @@ const config: Config = {
     locales: ["en"],
   },
 
+  plugins: [
+    "docusaurus-tailwindcss-loader",
+    function () {
+      return {
+        name: "custom-watch-plugin",
+        getPathsToWatch() {
+          return ["../../packages/responsive-preview-react/dist/**/*.{js,css}"];
+        },
+      };
+    },
+  ],
+
   presets: [
     [
       "classic",

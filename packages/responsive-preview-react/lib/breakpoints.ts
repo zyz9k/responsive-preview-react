@@ -18,6 +18,7 @@ export interface Breakpoint {
   minWidthRem: number;
   minWidthPx: number;
   percentage?: number;
+  show?: boolean;
   icon: React.ForwardRefExoticComponent<
     Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
   >;
@@ -26,8 +27,8 @@ export interface Breakpoint {
 export const breakpoints: Breakpoint[] = [
   {
     title: "xxs",
-    minWidthRem: 0,
-    minWidthPx: 0,
+    minWidthRem: 5,
+    minWidthPx: 80,
     icon: DoorClosedIcon,
   },
   {
