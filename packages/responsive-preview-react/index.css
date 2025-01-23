@@ -50,10 +50,10 @@
 }
 
 @layer base {
-  * {
+  *:where(.twp, .twp *):where(:not(.no-twp, .no-twp *)) {
     @apply rpr-border-border;
   }
-  body {
+  body:where(.twp, .twp *):where(:not(.no-twp, .no-twp *)) {
     @apply rpr-font-sans rpr-antialiased rpr-bg-background rpr-text-foreground;
   }
 }

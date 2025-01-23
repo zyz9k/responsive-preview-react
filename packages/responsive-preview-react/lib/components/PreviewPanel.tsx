@@ -24,7 +24,7 @@ export function PreviewPanel({
   return (
     <ResizablePanelGroup
       direction="horizontal"
-      className="rpr-mt-4 rpr-relative rpr-z-10 rpr-rounded-sm rpr-border-0 rpr-border-[#0000001f] rpr-bg-clip-padding rpr-bg-[#0000000f] !rpr-overflow-visible"
+      className="rpr-relative rpr-z-10 rpr-rounded-sm rpr-border-0 rpr-border-[#0000001f] rpr-bg-clip-padding rpr-bg-[#0000000f] !rpr-overflow-visible"
       style={{ backgroundImage: bgPattern }}
     >
       <ResizablePanel

@@ -10,8 +10,8 @@ const BASE_URL =
     : "/";
 
 const config: Config = {
-  title: "responsive-preview-react",
-  tagline: "Dinosaurs are cool",
+  tagline: "Preview your responsive designs with ease and power",
+  title: "Responsive Preview Component for React",
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
@@ -36,6 +36,10 @@ const config: Config = {
     defaultLocale: "en",
     locales: ["en"],
   },
+
+  stylesheets: [
+    "https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@300;400;500;600;700;800;900&family=Lexend:wght@100..900&display=swap",
+  ],
 
   plugins: [
     "docusaurus-tailwindcss-loader",
@@ -86,10 +90,11 @@ const config: Config = {
     // Replace with your project's social card
     image: "img/docusaurus-social-card.jpg",
     navbar: {
-      title: "My Site",
+      title: "Responsive Preview for React",
       logo: {
         alt: "My Site Logo",
-        src: "img/logo.svg",
+        srcDark: "img/rpr-dark-logo.svg",
+        src: "img/rpr-light-logo.svg",
       },
       items: [
         {
@@ -100,7 +105,7 @@ const config: Config = {
         },
         { to: "/blog", label: "Blog", position: "left" },
         {
-          href: "https://github.com/facebook/docusaurus",
+          href: "https://github.com/rjvim/responsive-preview-react",
           label: "GitHub",
           position: "right",
         },
@@ -122,16 +127,8 @@ const config: Config = {
           title: "Community",
           items: [
             {
-              label: "Stack Overflow",
-              href: "https://stackoverflow.com/questions/tagged/docusaurus",
-            },
-            {
-              label: "Discord",
-              href: "https://discordapp.com/invite/docusaurus",
-            },
-            {
               label: "X",
-              href: "https://x.com/docusaurus",
+              href: "https://x.com/rjv_im",
             },
           ],
         },
@@ -144,12 +141,12 @@ const config: Config = {
             },
             {
               label: "GitHub",
-              href: "https://github.com/facebook/docusaurus",
+              href: "https://github.com/rjvim/responsive-preview-react",
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Locospec.com. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,

@@ -59,7 +59,7 @@ export function PreviewWrapper({
   const currentBreakpoint = getBreakpoint(width, breakpoints);
 
   return (
-    <div className="twp rpr-grid rpr-w-full rpr-gap-2 rpr-p-4 rpr-bg-red-50">
+    <div className="twp rpr-grid rpr-w-full rpr-gap-4 rpr-p-8 rpr-bg-white rpr-rounded-md">
       <Toolbar
         width={width}
         maxWidth={maxWidth}

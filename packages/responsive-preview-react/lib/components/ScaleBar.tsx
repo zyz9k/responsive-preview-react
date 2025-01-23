@@ -45,7 +45,7 @@ export function ScaleBar({
   breakpoints,
 }: ScaleBarProps) {
   return (
-    <div className="rpr-relative rpr-w-full rpr-h-10 rpr-mt-1">
+    <div className="rpr-relative rpr-w-full rpr-h-10">
       <div className="rpr-w-full rpr-relative">
         <Marker label="0" sublabel="0rem" />
 
