@@ -34,14 +34,12 @@ function Marker({
 }
 
 interface ScaleBarProps {
-  width: number;
   maxWidth: number;
   currentBreakpoint?: string;
   breakpoints: Breakpoint[];
 }
 
 export function ScaleBar({
-  width,
   maxWidth,
   currentBreakpoint,
   breakpoints,
