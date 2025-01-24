@@ -3,9 +3,11 @@
 Please generate commit messages in the following format:
 
 - Generate instruction for each file in changes
-- Type: <type> (e.g., feat, fix, docs)
+- Type: <type> (e.g., feat, fix, docs, chore)
 - Short description: A concise summary of the change
-- Body: Additional details if necessary, wrapped to 72 characters, add new line after short description
+- Body: Additional details always, wrapped to 240 characters, add new line after short description
+- Don't add "feat" unless sure, go with "chore" or "fix" is not sure
+- If the changes are made to apps/docs folder, add (app-docs) after type
 
 ## Best Practices for Commit Messages
 
