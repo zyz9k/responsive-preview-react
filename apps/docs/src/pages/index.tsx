@@ -46,16 +46,15 @@ function PreviewDemo() {
   return (
     <div className="bg-gradient-to-r from-gray-200 to-slate-200 dark:from-gray-800 dark:to-slate-800">
       <div className="container py-8 lg:py-16 mx-auto drop-shadow-md">
-        <ChildPreview
-          config={{
-            darkMode: colorMode === "dark" ? true : false,
-            showToolbar: true,
-            showScale: true,
-            showLabels: true,
-          }}
-        >
-          <StackCard />
-        </ChildPreview>
+        <div className="bg-white dark:bg-gray-900 rounded-lg p-4 lg:p-8">
+          <ChildPreview
+            config={{
+              darkMode: colorMode === "dark" ? true : false,
+            }}
+          >
+            <StackCard />
+          </ChildPreview>
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,67 @@
+---
+sidebar_position: 2
+---
+
+import {
+  ChildPreview,
+  IFramePreview,
+} from "@locospec/responsive-preview-react";
+import StackCard from "@site/src/components/StackCard";
+import { useColorMode } from "@docusaurus/theme-common";
+
+# ChildPreview
+
+`ChildPreview` enables responsive previewing of React components rendered directly within the preview container.
+
+## Props
+
+```ts
+interface ChildPreviewProps {
+  children?: React.ReactNode; // Component to preview
+  breakpoints?: BreakpointConfig[]; // Custom breakpoint configuration
+  config?: PreviewConfig; // UI configuration
+}
+```
+
+## Example
+
+```tsx
+import { ChildPreview } from '@locospec/responsive-preview-react';
+
+// Basic usage
+<ChildPreview>
+  <YourComponent />
+</ChildPreview>
+
+// With custom config
+<ChildPreview
+  config={{
+    darkMode: true,
+    showToolbar: true,
+    showScale: true,
+    showLabels: true
+  }}
+>
+  <YourComponent />
+</ChildPreview>
+```
+
+## Demo
+
+export const PreviewWithColorMode = () => {
+    const { colorMode, setColorMode } = useColorMode();
+
+return (
+
+<ChildPreview
+  config={{
+    darkMode: colorMode === "dark" ? true : false,
+  }}
+>
+  <StackCard />
+</ChildPreview>
+
+)
+};
+
+<PreviewWithColorMode />

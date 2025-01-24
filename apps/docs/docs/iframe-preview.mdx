@@ -1,0 +1,59 @@
+import {
+  ChildPreview,
+  IFramePreview,
+} from "@locospec/responsive-preview-react";
+import { useColorMode } from "@docusaurus/theme-common";
+
+# IFramePreview
+
+`IFramePreview` displays external URLs in a responsive iframe container.
+
+## Props
+
+```ts
+interface IFramePreviewProps {
+  srcUrl: string; // URL to display
+  height?: number; // Iframe height (default: 930px)
+  breakpoints?: BreakpointConfig[];
+  config?: PreviewConfig;
+}
+```
+
+## Example
+
+```tsx
+import { IFramePreview } from '@locospec/responsive-preview-react';
+
+// Basic usage
+<IFramePreview srcUrl="https://example.com" />
+
+// With custom height and config
+<IFramePreview
+  srcUrl="https://example.com"
+  height={800}
+  config={{
+    darkMode: true,
+    showToolbar: false
+  }}
+/>
+```
+
+## Demo
+
+export const PreviewWithColorMode = () => {
+    const { colorMode, setColorMode } = useColorMode();
+
+return (
+
+<IFramePreview
+  srcUrl="https://tailwindcss.com"
+  height={500}
+  config={{
+    darkMode: colorMode === "dark" ? true : false,
+  }}
+/>
+
+)
+};
+
+<PreviewWithColorMode />

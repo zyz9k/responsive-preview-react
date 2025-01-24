@@ -57,7 +57,7 @@ function MarkerScale({
 }: ScaleBarProps) {
   return (
     <div className="rpr-relative rpr-w-full rpr-h-8">
-      <Marker label="0" sublabel="0rem" isDull />
+      <Marker label="0" sublabel="0px" isDull />
 
       {breakpoints
         .filter((breakpoint) => breakpoint.show)
