@@ -1,0 +1,70 @@
+---
+sidebar_position: 4
+---
+
+import {
+  ChildPreview,
+  IFramePreview,
+} from "@locospec/responsive-preview-react";
+import StackCard from "@site/src/components/StackCard";
+import { useColorMode } from "@docusaurus/theme-common";
+import { DoorClosedIcon, Tablet, Tv } from "lucide-react";
+
+# Breakpoints
+
+## Example
+
+```tsx
+import { ChildPreview } from '@locospec/responsive-preview-react';
+
+// Basic usage
+<ChildPreview>
+  <YourComponent />
+</ChildPreview>
+
+// With custom config
+<ChildPreview
+  config={{
+    darkMode: true,
+    showToolbar: true,
+    showScale: true,
+    showLabels: true
+  }}
+>
+  <YourComponent />
+</ChildPreview>
+```
+
+## Demo
+
+export const PreviewWithColorMode = () => {
+    const { colorMode, setColorMode } = useColorMode();
+
+return (
+
+<ChildPreview
+  config={{
+    darkMode: colorMode === "dark" ? true : false,
+  }}
+  breakpoints={[
+    {
+      title: "xxs",
+      minWidthRem: 5,
+      minWidthPx: 80,
+      icon: DoorClosedIcon,
+    },
+    {
+      title: "md",
+      minWidthRem: 28,
+      minWidthPx: 448,
+      icon: Tablet,
+    },
+  ]}
+>
+  <StackCard />
+</ChildPreview>
+
+)
+};
+
+<PreviewWithColorMode />
