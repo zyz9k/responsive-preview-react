@@ -7,6 +7,7 @@ import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import Heading from "@theme/Heading";
 import { ChildPreview } from "@locospec/responsive-preview-react";
 import ContainerQueryCardModern from "@site/src/components/ContainerQueryCardModern";
+import StackCard from "@site/src/components/StackCard";
 import { useColorMode } from "@docusaurus/theme-common";
 
 import styles from "./index.module.css";
@@ -32,7 +33,7 @@ function HomepageHeader() {
             className="button button--secondary button--lg"
             to="/docs/intro"
           >
-            Setup - 5min ⏱️
+            Get Started
           </Link>
         </div>
       </div>
@@ -56,7 +57,7 @@ function PreviewDemo() {
             },
           }}
         >
-          <ContainerQueryCardModern />
+          <StackCard />
         </ChildPreview>
       </div>
     </div>

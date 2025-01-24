@@ -115,3 +115,9 @@ Check out the article that goes into the depth of how this repo has been set up 
 ```
 code2prompt packages/responsive-preview-react/lib --output=claude.txt --tokens
 ```
+
+
+
+npm run package:watch 
+
+npm run docs:start

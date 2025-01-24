@@ -114,6 +114,7 @@ export function PreviewWrapper({
 
           {showScale && (
             <ScaleBar
+              width={width}
               maxWidth={maxWidth}
               currentBreakpoint={currentBreakpoint?.title}
               breakpoints={availableBreakpoints}

@@ -27,7 +27,7 @@ export function PreviewPanel({
   return (
     <ResizablePanelGroup
       direction="horizontal"
-      className="rpr-relative rpr-z-10 rpr-rounded-sm rpr-border-0 rpr-border-[#0000001f] rpr-bg-clip-padding rpr-bg-[#0000000f] !rpr-overflow-visible"
+      className="rpr-relative rpr-z-10 rpr-rounded-sm rpr-border-0 rpr-border-[#0000001f] rpr-bg-clip-padding rpr-bg-gray-300 dark:rpr-bg-gray-600 !rpr-overflow-visible"
       style={{ backgroundImage: bgPattern }}
     >
       <ResizablePanel
@@ -47,6 +47,7 @@ export function PreviewPanel({
         className="rpr-z-50 rpr-w-0"
         onDragging={(e) => setIsHandleResizing(e)}
       />
+      {/* <ResizableHandle className="rpr-relative rpr-hidden rpr-w-3 rpr-bg-transparent rpr-p-0 after:rpr-absolute after:rpr-right-0 after:rpr-top-1/2 after:rpr-h-8 after:rpr-w-[6px] after:-rpr-translate-y-1/2 after:rpr-translate-x-[-1px] after:rpr-rounded-full after:rpr-bg-border after:rpr-transition-all after:rpr-hover:h-10 md:rpr-block" /> */}
       <ResizablePanel defaultSize={0} minSize={0} />
     </ResizablePanelGroup>
   );

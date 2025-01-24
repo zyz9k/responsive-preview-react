@@ -11,6 +11,7 @@ interface BreakpointMarkerProps {
 }
 
 interface ScaleBarProps {
+  width: number;
   maxWidth: number;
   currentBreakpoint?: string;
   breakpoints: Breakpoint[];
@@ -115,6 +116,7 @@ function SignScale({
 }
 
 export function ScaleBar({
+  width,
   maxWidth,
   currentBreakpoint,
   breakpoints,
