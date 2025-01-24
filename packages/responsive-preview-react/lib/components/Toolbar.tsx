@@ -8,9 +8,15 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from "@/base/components/ui/toggle-group";
-import { Fullscreen, Pause, Play } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  MaximizeIcon,
+  Pause,
+  Play,
+} from "lucide-react";
 import type { Breakpoint } from "../breakpoints";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface ToolbarProps {
   width: number;
@@ -29,10 +35,27 @@ export function Toolbar({
 }: ToolbarProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout>();
+  const currentIndex = availableBreakpoints.findIndex(
+    (bp) => bp.title === breakpointTitle
+  );
+
+  const handlePrevBreakpoint = () => {
+    if (currentIndex > 0) {
+      const prevBp = availableBreakpoints[currentIndex - 1];
+      onBreakpointChange(prevBp?.percentage?.toString() || "0");
+    }
+  };
+
+  const handleNextBreakpoint = () => {
+    if (currentIndex < availableBreakpoints.length - 1) {
+      const nextBp = availableBreakpoints[currentIndex + 1];
+      onBreakpointChange(nextBp?.percentage?.toString() || "0");
+    }
+  };
 
   const play = useCallback(() => {
     let index = 0;
-    const breakpoints = availableBreakpoints.filter((bp) => bp.show);
+    const breakpoints = availableBreakpoints;
 
     const start = () => {
       intervalRef.current = setInterval(() => {
@@ -42,10 +65,11 @@ export function Toolbar({
         index++;
 
         if (index >= breakpoints.length) {
+          onBreakpointChange("100");
           stop();
           setIsPlaying(false);
         }
-      }, 1000);
+      }, 500);
     };
 
     const stop = () => {
@@ -78,22 +102,13 @@ export function Toolbar({
 
   return (
     <div className="rpr-grow rpr-flex rpr-items-center rpr-justify-between prp-mr-[12px]">
-      <div className="rpr-py-2 rpr-text-xs">
-        Width: {width}px ({Number((width / maxWidth) * 100).toFixed(1)}%)
-        {breakpointTitle ? `[${breakpointTitle}]` : ""}
-      </div>
-
       <div className="rpr-hidden rpr-h-7 rpr-items-center rpr-gap-1.5 rpr-rounded-md rpr-border rpr-p-[2px] rpr-shadow-none lg:rpr-flex">
         <TooltipProvider>
-          <ToggleGroup
-            type="single"
-            defaultValue="100"
-            onValueChange={onBreakpointChange}
-            className="rpr-flex rpr-items-center"
-          >
+          <ToggleGroup type="multiple" className="rpr-flex rpr-items-center">
             <ToggleGroupItem
               value="play"
               onClick={togglePlay}
+              data-state="off"
               className="rpr-h-[22px] rpr-w-[22px] rpr-min-w-0 rpr-rounded-sm rpr-p-0"
             >
               <Tooltip>
@@ -110,6 +125,67 @@ export function Toolbar({
               </Tooltip>
             </ToggleGroupItem>
 
+            <ToggleGroupItem
+              value="prev"
+              onClick={handlePrevBreakpoint}
+              disabled={currentIndex <= 0}
+              data-state="off"
+              className="rpr-h-[22px] rpr-w-[22px] rpr-min-w-0 rpr-rounded-sm rpr-p-0"
+            >
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <ChevronLeft className="rpr-h-3.5 rpr-w-3.5" />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Previous Breakpoint</p>
+                </TooltipContent>
+              </Tooltip>
+            </ToggleGroupItem>
+
+            <ToggleGroupItem
+              value="next"
+              onClick={handleNextBreakpoint}
+              data-state="off"
+              disabled={currentIndex >= availableBreakpoints.length - 1}
+              className="rpr-h-[22px] rpr-w-[22px] rpr-min-w-0 rpr-rounded-sm rpr-p-0"
+            >
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <ChevronRight className="rpr-h-3.5 rpr-w-3.5" />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Next Breakpoint</p>
+                </TooltipContent>
+              </Tooltip>
+            </ToggleGroupItem>
+          </ToggleGroup>
+        </TooltipProvider>
+      </div>
+
+      <div className="rpr-flex rpr-items-center rpr-gap-2 rpr-rounded-md rpr-bg-muted/40 rpr-px-3 rpr-py-1.5 rpr-w-50">
+        <span className="rpr-flex rpr-items-center rpr-gap-1 rpr-text-xs rpr-font-medium">
+          Width: <span className="rpr-font-mono">{width}px</span>
+        </span>
+
+        <span className="rpr-text-xs rpr-text-muted-foreground">
+          ({Number((width / maxWidth) * 100).toFixed(1)}%)
+        </span>
+
+        {breakpointTitle && (
+          <span className="rpr-rounded rpr-bg-primary/10 rpr-px-1.5 rpr-py-0.5 rpr-text-[10px] rpr-font-medium rpr-text-primary">
+            {breakpointTitle}
+          </span>
+        )}
+      </div>
+
+      <div className="rpr-hidden rpr-h-7 rpr-items-center rpr-gap-1.5 rpr-rounded-md rpr-border rpr-p-[2px] rpr-shadow-none lg:rpr-flex">
+        <TooltipProvider>
+          <ToggleGroup
+            type="single"
+            defaultValue="100"
+            onValueChange={onBreakpointChange}
+            className="rpr-flex rpr-items-center"
+          >
             {availableBreakpoints
               .filter((breakpoint) => breakpoint.show)
               .map((breakpoint: Breakpoint) => {
@@ -147,7 +223,7 @@ export function Toolbar({
             >
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Fullscreen className="rpr-h-3.5 rpr-w-3.5" />
+                  <MaximizeIcon className="rpr-h-3.5 rpr-w-3.5" />
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Full Width</p>

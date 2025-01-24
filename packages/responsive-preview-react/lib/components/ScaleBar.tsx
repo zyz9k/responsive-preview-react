@@ -2,10 +2,11 @@ import { cn } from "@/base/lib/utils";
 import type { Breakpoint } from "../breakpoints";
 import type { ScaleConfig } from "../types";
 
-interface BreakpointMarkerProps {
+interface MarkerProps {
   label: string;
   sublabel: string;
   position?: number;
+  isValid?: boolean;
   isCurrent?: boolean;
   isDull?: boolean;
 }
@@ -29,14 +30,16 @@ function Marker({
   sublabel,
   position,
   isCurrent,
+  isValid,
   isDull = false,
-}: BreakpointMarkerProps) {
+}: MarkerProps) {
   return (
     <div
       className={cn(
-        "rpr-absolute rpr-flex rpr-flex-col rpr-items-center rpr-translate-x-[-50%] rpr-text-gray-600 dark:rpr-text-gray-200 rpr-text-xs whitespace-nowrap",
-        isCurrent && "rpr-font-bold",
-        isDull && "rpr-opacity-50"
+        "rpr-absolute rpr-flex rpr-flex-col rpr-items-center rpr-translate-x-[-50%] rpr-text-gray-400 dark:rpr-text-gray-200 rpr-text-xs whitespace-nowrap rpr-font-normal",
+        isCurrent && "!rpr-font-bold",
+        isValid && "rpr-font-medium rpr-text-gray-500 dark:rpr-text-gray-300",
+        isDull && "rpr-font-thin"
       )}
       style={position !== undefined ? { left: `${position}px` } : undefined}
     >
@@ -46,7 +49,8 @@ function Marker({
   );
 }
 
-function LabelScale({
+function MarkerScale({
+  width,
   maxWidth,
   currentBreakpoint,
   breakpoints,
@@ -64,6 +68,7 @@ function LabelScale({
             sublabel={`${breakpoint.minWidthPx}px`}
             position={breakpoint.minWidthPx}
             isCurrent={currentBreakpoint === breakpoint.title}
+            isValid={width > breakpoint.minWidthPx}
           />
         ))}
 
@@ -128,7 +133,8 @@ export function ScaleBar({
     <>
       <div className="rpr-grid rpr-gap-1">
         {showLabels && (
-          <LabelScale
+          <MarkerScale
+            width={width}
             maxWidth={maxWidth}
             currentBreakpoint={currentBreakpoint}
             breakpoints={breakpoints}
@@ -137,6 +143,7 @@ export function ScaleBar({
 
         {showSigns && (
           <SignScale
+            width={width}
             maxWidth={maxWidth}
             currentBreakpoint={currentBreakpoint}
             breakpoints={breakpoints}

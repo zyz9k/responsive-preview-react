@@ -90,7 +90,7 @@ export function PreviewWrapper({
     <div className="twp">
       <div className={cn(darkMode && "rpr-dark dark")}>
         <div
-          className="rpr-grid rpr-w-full rpr-gap-4 rpr-p-8 rpr-bg-gray-50 dark:rpr-bg-gray-900 rpr-rounded-md rpr-text-gray-800 dark:rpr-text-white"
+          className="rpr-grid rpr-w-full rpr-gap-4 rpr-p-8 rpr-bg-white dark:rpr-bg-gray-900 rpr-rounded-md rpr-text-gray-800 dark:rpr-text-white"
           ref={rprRef}
         >
           <div className="rpr-flex rpr-items-center rpr-justify-between">
@@ -103,7 +103,7 @@ export function PreviewWrapper({
                 breakpointTitle={currentBreakpoint?.title}
                 availableBreakpoints={availableBreakpoints}
                 onBreakpointChange={(value) => {
-                  console.log("value", value, parseFloat(value));
+                  console.log("value", value);
                   if (resizablePanelRef?.current) {
                     resizablePanelRef.current.resize(parseFloat(value));
                   }
