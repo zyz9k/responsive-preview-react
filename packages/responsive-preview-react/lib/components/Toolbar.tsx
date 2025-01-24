@@ -160,9 +160,25 @@ export function Toolbar({
             </ToggleGroupItem>
           </ToggleGroup>
         </TooltipProvider>
+
+        <div className="rpr-flex rpr-items-center rpr-gap-2 rpr-w-50">
+          <span className="rpr-flex rpr-items-center rpr-gap-1 rpr-text-xs rpr-font-medium">
+            Width: <span className="rpr-font-mono">{width}px</span>
+          </span>
+
+          <span className="rpr-text-xs rpr-text-muted-foreground">
+            ({Number((width / maxWidth) * 100).toFixed(0)}%)
+          </span>
+
+          {breakpointTitle && (
+            <span className="rpr-rounded rpr-bg-primary/10 rpr-px-1.5 rpr-py-0.5 rpr-text-[10px] rpr-font-medium rpr-text-primary">
+              {breakpointTitle}
+            </span>
+          )}
+        </div>
       </div>
 
-      <div className="rpr-flex rpr-items-center rpr-gap-2 rpr-rounded-md rpr-bg-muted/40 rpr-px-3 rpr-py-1.5 rpr-w-50">
+      <div className="rpr-flex rpr-items-center rpr-gap-2 rpr-rounded-md rpr-bg-muted/40 rpr-px-3 rpr-py-1.5 rpr-w-50 hidden">
         <span className="rpr-flex rpr-items-center rpr-gap-1 rpr-text-xs rpr-font-medium">
           Width: <span className="rpr-font-mono">{width}px</span>
         </span>

@@ -88,30 +88,35 @@ export function PreviewWrapper({
 
   return (
     <div className="twp">
-      <div className={cn(darkMode && "rpr-dark dark")}>
+      <div
+        className={cn(darkMode && "rpr-dark dark")}
+        data-theme={darkMode ? "dark" : "light"}
+      >
         <div
           className="rpr-relative rpr-grid rpr-w-full rpr-gap-4 rpr-p-8 rpr-bg-white dark:rpr-bg-gray-900 rpr-rounded-md rpr-text-gray-800 dark:rpr-text-white"
           ref={rprRef}
         >
-          <div className="rpr-absolute rpr-top-0 rpr-right-0 rpr-h-1">
-            <Settings config={config} onChange={setConfig} rprRef={rprRef} />
-          </div>
+          <div className="rpr-flex rpr-items-center rpr-justify-between rpr-min-h-9 rpr-space-x-2">
+            <div className="rpr-flex-grow">
+              {showToolbar && (
+                <Toolbar
+                  width={width}
+                  maxWidth={maxWidth}
+                  breakpointTitle={currentBreakpoint?.title}
+                  availableBreakpoints={availableBreakpoints}
+                  onBreakpointChange={(value) => {
+                    console.log("value", value);
+                    if (resizablePanelRef?.current) {
+                      resizablePanelRef.current.resize(parseFloat(value));
+                    }
+                  }}
+                />
+              )}
+            </div>
 
-          <div className="rpr-flex rpr-items-center rpr-justify-between">
-            {showToolbar && (
-              <Toolbar
-                width={width}
-                maxWidth={maxWidth}
-                breakpointTitle={currentBreakpoint?.title}
-                availableBreakpoints={availableBreakpoints}
-                onBreakpointChange={(value) => {
-                  console.log("value", value);
-                  if (resizablePanelRef?.current) {
-                    resizablePanelRef.current.resize(parseFloat(value));
-                  }
-                }}
-              />
-            )}
+            <div className="rpr-justify-end rpr-h-7 rpr-p-[2px]">
+              <Settings config={config} onChange={setConfig} rprRef={rprRef} />
+            </div>
           </div>
 
           {showScale && (
