@@ -90,12 +90,14 @@ export function PreviewWrapper({
     <div className="twp">
       <div className={cn(darkMode && "rpr-dark dark")}>
         <div
-          className="rpr-grid rpr-w-full rpr-gap-4 rpr-p-8 rpr-bg-white dark:rpr-bg-gray-900 rpr-rounded-md rpr-text-gray-800 dark:rpr-text-white"
+          className="rpr-relative rpr-grid rpr-w-full rpr-gap-4 rpr-p-8 rpr-bg-white dark:rpr-bg-gray-900 rpr-rounded-md rpr-text-gray-800 dark:rpr-text-white"
           ref={rprRef}
         >
-          <div className="rpr-flex rpr-items-center rpr-justify-between">
+          <div className="rpr-absolute rpr-top-0 rpr-right-0 rpr-h-1">
             <Settings config={config} onChange={setConfig} rprRef={rprRef} />
+          </div>
 
+          <div className="rpr-flex rpr-items-center rpr-justify-between">
             {showToolbar && (
               <Toolbar
                 width={width}

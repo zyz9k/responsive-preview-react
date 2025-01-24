@@ -46,7 +46,7 @@ export function Settings({ config, onChange, rprRef }: SettingsProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button className="rpr-h-[22px] rpr-w-[22px] rpr-rounded-sm rpr-p-0">
+        <button className="rpr-h-5 rpr-w-5 rpr-rounded-sm rpr-p-0">
           <SettingsIcon className="rpr-h-3.5 rpr-w-3.5" />
         </button>
       </PopoverTrigger>
