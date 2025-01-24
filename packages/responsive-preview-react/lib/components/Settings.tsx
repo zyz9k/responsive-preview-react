@@ -3,7 +3,6 @@ import {
   RulerIcon,
   TextIcon,
   SettingsIcon,
-  MoonIcon,
 } from "lucide-react";
 import {
   Popover,
@@ -24,7 +23,7 @@ interface SettingsProps {
 
 export function Settings({ config, onChange, rprRef }: SettingsProps) {
   const {
-    darkMode = false,
+    // darkMode = false,
     showToolbar = true,
     showLabels = true,
     showScale = true,
