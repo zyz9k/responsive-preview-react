@@ -1,8 +1,7 @@
 import {
   LayoutPanelTop,
-  ScaleIcon,
-  TextIcon,
   RulerIcon,
+  TextIcon,
   SettingsIcon,
   MoonIcon,
 } from "lucide-react";
@@ -27,20 +26,12 @@ export function Settings({ config, onChange, rprRef }: SettingsProps) {
   const {
     darkMode = false,
     showToolbar = true,
+    showLabels = true,
     showScale = true,
-    scaleConfig,
   } = config;
-  const { showLabels = true, showSigns = true } = scaleConfig || {};
 
   const handleConfigChange = (key: string, value: boolean) => {
-    if (key === "showLabels" || key === "showSigns") {
-      onChange({
-        ...config,
-        scaleConfig: { ...config.scaleConfig, [key]: value },
-      });
-    } else {
-      onChange({ ...config, [key]: value });
-    }
+    onChange({ ...config, [key]: value });
   };
 
   return (
@@ -73,16 +64,7 @@ export function Settings({ config, onChange, rprRef }: SettingsProps) {
             <LayoutPanelTop className="rpr-h-4 rpr-w-4" />
           </ToggleGroupItem>
           <ToggleGroupItem
-            value="showScale"
-            data-state={showScale ? "on" : "off"}
-            onClick={() => handleConfigChange("showScale", !showScale)}
-            className="rpr-p-2"
-          >
-            <ScaleIcon className="rpr-h-4 rpr-w-4" />
-          </ToggleGroupItem>
-          <ToggleGroupItem
             value="showLabels"
-            disabled={!showScale}
             data-state={showLabels ? "on" : "off"}
             onClick={() => handleConfigChange("showLabels", !showLabels)}
             className="rpr-p-2"
@@ -90,10 +72,9 @@ export function Settings({ config, onChange, rprRef }: SettingsProps) {
             <TextIcon className="rpr-h-4 rpr-w-4" />
           </ToggleGroupItem>
           <ToggleGroupItem
-            value="showSigns"
-            disabled={!showScale}
-            data-state={showSigns ? "on" : "off"}
-            onClick={() => handleConfigChange("showSigns", !showSigns)}
+            value="showScale"
+            data-state={showScale ? "on" : "off"}
+            onClick={() => handleConfigChange("showScale", !showScale)}
             className="rpr-p-2"
           >
             <RulerIcon className="rpr-h-4 rpr-w-4" />

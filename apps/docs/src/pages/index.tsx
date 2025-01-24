@@ -51,10 +51,7 @@ function PreviewDemo() {
             darkMode: colorMode === "dark" ? true : false,
             showToolbar: true,
             showScale: true,
-            scaleConfig: {
-              showLabels: true,
-              showSigns: true,
-            },
+            showLabels: true,
           }}
         >
           <StackCard />

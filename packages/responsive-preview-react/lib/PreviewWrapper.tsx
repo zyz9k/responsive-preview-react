@@ -25,10 +25,7 @@ export function PreviewWrapper({
     darkMode: false,
     showToolbar: true,
     showScale: true,
-    scaleConfig: {
-      showLabels: true,
-      showSigns: true,
-    },
+    showLabels: true,
   },
 }: PreviewWrapperProps) {
   const [config, setConfig] = React.useState<PreviewConfig>(initialConfig);
@@ -36,7 +33,7 @@ export function PreviewWrapper({
     darkMode = false,
     showToolbar = true,
     showScale = true,
-    scaleConfig,
+    showLabels = true,
   } = config;
   const resizablePanelRef = React.useRef<ImperativePanelHandle>(null);
   const [width, setWidth] = React.useState<number>(0);
@@ -119,15 +116,14 @@ export function PreviewWrapper({
             </div>
           </div>
 
-          {showScale && (
-            <ScaleBar
-              width={width}
-              maxWidth={maxWidth}
-              currentBreakpoint={currentBreakpoint?.title}
-              breakpoints={availableBreakpoints}
-              config={scaleConfig}
-            />
-          )}
+          <ScaleBar
+            width={width}
+            maxWidth={maxWidth}
+            currentBreakpoint={currentBreakpoint?.title}
+            breakpoints={availableBreakpoints}
+            showLabels={showLabels}
+            showScale={showScale}
+          />
 
           <PreviewPanel
             panelRef={resizablePanelRef}

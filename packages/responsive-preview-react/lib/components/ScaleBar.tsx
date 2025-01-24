@@ -1,6 +1,5 @@
 import { cn } from "@/base/lib/utils";
 import type { Breakpoint } from "../breakpoints";
-import type { ScaleConfig } from "../types";
 
 interface MarkerProps {
   label: string;
@@ -16,7 +15,8 @@ interface ScaleBarProps {
   maxWidth: number;
   currentBreakpoint?: string;
   breakpoints: Breakpoint[];
-  config?: ScaleConfig;
+  showLabels?: boolean;
+  showScale?: boolean;
 }
 
 interface SignProps {
@@ -125,10 +125,9 @@ export function ScaleBar({
   maxWidth,
   currentBreakpoint,
   breakpoints,
-  config = {},
+  showScale,
+  showLabels,
 }: ScaleBarProps) {
-  const { showLabels = true, showSigns = true } = config;
-
   return (
     <>
       <div className="rpr-grid rpr-gap-1">
@@ -141,7 +140,7 @@ export function ScaleBar({
           />
         )}
 
-        {showSigns && (
+        {showScale && (
           <SignScale
             width={width}
             maxWidth={maxWidth}
