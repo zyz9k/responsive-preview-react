@@ -36,7 +36,7 @@ function Marker({
   return (
     <div
       className={cn(
-        "rpr-absolute rpr-flex rpr-flex-col rpr-items-center rpr-translate-x-[-50%] rpr-text-gray-400 dark:rpr-text-gray-200 rpr-text-xs whitespace-nowrap rpr-font-normal",
+        "rpr-absolute rpr-flex rpr-flex-col rpr-items-center rpr-translate-x-[-50%] first:rpr-translate-x-[0%] last:rpr-translate-x-[-100%] first:rpr-items-start last:rpr-items-end rpr-text-gray-400 dark:rpr-text-gray-200 rpr-text-xs whitespace-nowrap rpr-font-normal",
         isCurrent && "!rpr-font-bold",
         isValid && "rpr-font-medium rpr-text-gray-500 dark:rpr-text-gray-300",
         isDull && "rpr-font-thin"
