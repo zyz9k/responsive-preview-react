@@ -9,6 +9,7 @@ import {
   ToggleGroupItem,
 } from "@/base/components/ui/toggle-group";
 import {
+  Camera,
   ChevronLeft,
   ChevronRight,
   MaximizeIcon,
@@ -17,6 +18,7 @@ import {
 } from "lucide-react";
 import type { Breakpoint } from "../breakpoints";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { domToPng } from "modern-screenshot"; // Add this import
 
 interface ToolbarProps {
   width: number;
@@ -24,6 +26,7 @@ interface ToolbarProps {
   breakpointTitle?: string;
   availableBreakpoints: Breakpoint[];
   onBreakpointChange: (value: string) => void;
+  panelRef: React.RefObject<HTMLDivElement>;
 }
 
 export function Toolbar({
@@ -32,12 +35,27 @@ export function Toolbar({
   breakpointTitle,
   availableBreakpoints,
   onBreakpointChange,
+  panelRef,
 }: ToolbarProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout>();
   const currentIndex = availableBreakpoints.findIndex(
     (bp) => bp.title === breakpointTitle
   );
+
+  const handleScreenshot = async () => {
+    if (panelRef.current) {
+      try {
+        const dataUrl = await domToPng(panelRef.current);
+        const link = document.createElement("a");
+        link.download = `preview-${width}px.png`;
+        link.href = dataUrl;
+        link.click();
+      } catch (err) {
+        console.error("Screenshot failed:", err);
+      }
+    }
+  };
 
   const handlePrevBreakpoint = () => {
     if (currentIndex > 0) {
@@ -155,6 +173,22 @@ export function Toolbar({
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Next Breakpoint</p>
+                </TooltipContent>
+              </Tooltip>
+            </ToggleGroupItem>
+
+            <ToggleGroupItem
+              value="screenshot"
+              onClick={handleScreenshot}
+              data-state="off"
+              className="rpr-h-[22px] rpr-w-[22px] rpr-min-w-0 rpr-rounded-sm rpr-p-0"
+            >
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Camera className="rpr-h-3.5 rpr-w-3.5" />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Take Screenshot</p>
                 </TooltipContent>
               </Tooltip>
             </ToggleGroupItem>

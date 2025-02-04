@@ -114,11 +114,11 @@ export function PreviewWrapper({
                   breakpointTitle={currentBreakpoint?.title}
                   availableBreakpoints={availableBreakpoints}
                   onBreakpointChange={(value) => {
-                    console.log("value", value);
                     if (resizablePanelRef?.current) {
                       resizablePanelRef.current.resize(parseFloat(value));
                     }
                   }}
+                  panelRef={panelContentRef} // Add this line
                 />
               )}
             </div>
