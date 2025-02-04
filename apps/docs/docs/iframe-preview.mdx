@@ -1,0 +1,100 @@
+---
+sidebar_position: 3
+---
+
+import {
+  ChildPreview,
+  IFramePreview,
+} from "@locospec/responsive-preview-react";
+import { useColorMode } from "@docusaurus/theme-common";
+
+# IFramePreview
+
+`IFramePreview` displays external URLs in a responsive iframe container.
+
+## Demo
+
+Note: In following demo we are supplying `https://ui.shadcn.com/view/styles/new-york/sidebar-07` which is one of the blocks on shadcn.
+
+export const PreviewWithColorMode = () => {
+    const { colorMode, setColorMode } = useColorMode();
+
+return (
+
+<IFramePreview
+  srcUrl="https://ui.shadcn.com/view/styles/new-york/sidebar-07"
+  height={500}
+  config={{
+    darkMode: colorMode === "dark" ? true : false,
+  }}
+/>
+
+)
+};
+
+<PreviewWithColorMode />
+
+## Props
+
+```ts
+interface IFramePreviewProps {
+  srcUrl: string; // URL to display
+  height?: number; // Iframe height (default: 930px)
+  breakpoints?: BreakpointConfig[];
+  config?: PreviewConfig;
+}
+```
+
+## Usage
+
+### Import IFramePreview
+
+```tsx
+import { IFramePreview } from "@locospec/responsive-preview-react";
+```
+
+### Use IFramePreview
+
+```tsx
+<IFramePreview srcUrl="//" />
+```
+
+### Custom Configuration
+
+```tsx
+<IFramePreview
+  srcUrl="https://ui.shadcn.com/view/styles/new-york/sidebar-07"
+  height={500}
+  config={{
+    darkMode: true,
+    showToolbar: true,
+    showScale: true,
+    showLabels: true,
+  }}
+/>
+```
+
+## Examples
+
+### Disable Scale & Toolbar
+
+export const PreviewWithNoToolbar = () => {
+    const { colorMode, setColorMode } = useColorMode();
+
+return (
+
+<IFramePreview
+  srcUrl="https://ui.shadcn.com/view/styles/new-york/sidebar-07"
+  height={500}
+  config={{
+    darkMode: colorMode === "dark" ? true : false,
+    showToolbar: false,
+    showScale: false,
+    showLabels: false,
+  }}
+/>
+
+)
+};
+
+<PreviewWithNoToolbar />

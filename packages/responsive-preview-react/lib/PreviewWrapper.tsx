@@ -17,33 +17,33 @@ interface PreviewWrapperProps {
   config?: PreviewConfig;
 }
 
+const defaultConfig = {
+  darkMode: false,
+  showToolbar: true,
+  showScale: true,
+  showLabels: true,
+};
+
 export function PreviewWrapper({
   children,
   className,
   breakpoints = defaultBreakpoints,
-  config: initialConfig = {
-    darkMode: false,
-    showToolbar: true,
-    showScale: true,
-    showLabels: true,
-  },
+  config: initialConfig = defaultConfig,
 }: PreviewWrapperProps) {
   const [config, setConfig] = React.useState<PreviewConfig>(initialConfig);
+
   const {
     darkMode = false,
     showToolbar = true,
     showScale = true,
     showLabels = true,
   } = config;
+
   const resizablePanelRef = React.useRef<ImperativePanelHandle>(null);
   const [width, setWidth] = React.useState<number>(0);
   const [maxWidth, setMaxWidth] = React.useState<number>(0);
   const panelContentRef = React.useRef<HTMLDivElement>(null);
   const rprRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-    setConfig(initialConfig);
-  }, [initialConfig]);
 
   React.useEffect(() => {
     if (width > maxWidth) {
@@ -62,6 +62,18 @@ export function PreviewWrapper({
     observer.observe(panelContentRef.current);
     return () => observer.disconnect();
   }, []);
+
+  React.useEffect(() => {
+    console.log("initialConfig", initialConfig);
+    setConfig(initialConfig);
+  }, [initialConfig]);
+
+  // React.useEffect(() => {
+  //   console.log(JSON.stringify(config), JSON.stringify(initialConfig));
+  //   if (JSON.stringify(config) !== JSON.stringify(initialConfig)) {
+  //     setConfig(initialConfig);
+  //   }
+  // }, [initialConfig]);
 
   const availableBreakpoints = React.useMemo(() => {
     return breakpoints.map((breakpoint: Breakpoint) => {
@@ -90,7 +102,7 @@ export function PreviewWrapper({
         data-theme={darkMode ? "dark" : "light"}
       >
         <div
-          className="rpr-relative rpr-grid rpr-w-full rpr-gap-4 rpr-p-8 rpr-bg-white dark:rpr-bg-gray-900 rpr-rounded-md rpr-text-gray-800 dark:rpr-text-white"
+          className="rpr-relative rpr-grid rpr-w-full rpr-gap-4 rpr-p-0 rpr-bg-transparent dark:rpr-bg-transparent rpr-rounded-md rpr-text-gray-800 dark:rpr-text-white"
           ref={rprRef}
         >
           <div className="rpr-flex rpr-items-center rpr-justify-between rpr-min-h-9 rpr-space-x-2">
@@ -102,17 +114,24 @@ export function PreviewWrapper({
                   breakpointTitle={currentBreakpoint?.title}
                   availableBreakpoints={availableBreakpoints}
                   onBreakpointChange={(value) => {
-                    console.log("value", value);
                     if (resizablePanelRef?.current) {
                       resizablePanelRef.current.resize(parseFloat(value));
                     }
                   }}
+                  panelRef={panelContentRef} // Add this line
                 />
               )}
             </div>
 
             <div className="rpr-justify-end rpr-h-7 rpr-p-[2px]">
-              <Settings config={config} onChange={setConfig} rprRef={rprRef} />
+              <Settings
+                config={config}
+                onChange={(newConfig) => {
+                  console.log("newConfig", newConfig);
+                  setConfig(newConfig);
+                }}
+                rprRef={rprRef}
+              />
             </div>
           </div>
 

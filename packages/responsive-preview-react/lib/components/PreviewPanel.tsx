@@ -35,7 +35,7 @@ export function PreviewPanel({
         className={cn(
           `rpr-border ${className}`,
           !isHandleResizing &&
-            "rpr-transition-all rpr-duration-300 rpr-ease-in-out"
+            "rpr-transition-all rpr-duration-200 rpr-ease-in-out"
         )}
         defaultSize={100}
         minSize={20}

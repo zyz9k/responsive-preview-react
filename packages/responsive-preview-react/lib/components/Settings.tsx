@@ -3,7 +3,6 @@ import {
   RulerIcon,
   TextIcon,
   SettingsIcon,
-  MoonIcon,
 } from "lucide-react";
 import {
   Popover,
@@ -24,11 +23,13 @@ interface SettingsProps {
 
 export function Settings({ config, onChange, rprRef }: SettingsProps) {
   const {
-    darkMode = false,
+    // darkMode = false,
     showToolbar = true,
     showLabels = true,
     showScale = true,
   } = config;
+
+  // console.log("showToolbar", showToolbar);
 
   const handleConfigChange = (key: string, value: boolean) => {
     onChange({ ...config, [key]: value });
@@ -47,14 +48,14 @@ export function Settings({ config, onChange, rprRef }: SettingsProps) {
           variant="outline"
           className="rpr-flex rpr-gap-1"
         >
-          <ToggleGroupItem
+          {/* <ToggleGroupItem
             value="darkMode"
             data-state={darkMode ? "on" : "off"}
             onClick={() => handleConfigChange("darkMode", !darkMode)}
             className="rpr-p-2"
           >
             <MoonIcon className="rpr-h-4 rpr-w-4" />
-          </ToggleGroupItem>
+          </ToggleGroupItem> */}
           <ToggleGroupItem
             value="showToolbar"
             data-state={showToolbar ? "on" : "off"}

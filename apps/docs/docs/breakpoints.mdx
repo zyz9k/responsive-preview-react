@@ -1,0 +1,81 @@
+---
+sidebar_position: 4
+---
+
+import {
+  ChildPreview,
+  IFramePreview,
+} from "@locospec/responsive-preview-react";
+import StackCard from "@site/src/components/StackCard";
+import { useColorMode } from "@docusaurus/theme-common";
+import { DoorClosedIcon, Tablet, Tv } from "lucide-react";
+
+# Breakpoints
+
+The breakpoint configuration is used to show the toolbar, labels and scale. You can customize the breakpoints to match your design system. It doesn't effect the behaviour of the component itself.
+
+## Default Presets
+
+Component comes with it's own default set of breakpoints and you can find them here: [Here](https://github.com/rjvim/responsive-preview-react/blob/main/packages/responsive-preview-react/lib/breakpoints.ts)
+
+## Custom Breakpoints
+
+You can pass breakpoints like following:
+
+```tsx
+<ChildPreview
+  config={{
+    darkMode: colorMode === "dark" ? true : false,
+  }}
+  breakpoints={[
+    {
+      title: "xxs",
+      minWidthRem: 5,
+      minWidthPx: 80,
+      icon: DoorClosedIcon,
+    },
+    {
+      title: "md",
+      minWidthRem: 28,
+      minWidthPx: 448,
+      icon: Tablet,
+    },
+  ]}
+>
+  <Child />
+</ChildPreview>
+```
+
+### Demo
+
+export const PreviewWithColorMode = () => {
+const { colorMode, setColorMode } = useColorMode();
+
+return (
+
+<ChildPreview
+  config={{
+    darkMode: colorMode === "dark" ? true : false,
+  }}
+  breakpoints={[
+    {
+      title: "xxs",
+      minWidthRem: 5,
+      minWidthPx: 80,
+      icon: DoorClosedIcon,
+    },
+    {
+      title: "md",
+      minWidthRem: 28,
+      minWidthPx: 448,
+      icon: Tablet,
+    },
+  ]}
+>
+  <StackCard />
+</ChildPreview>
+
+)
+};
+
+<PreviewWithColorMode />

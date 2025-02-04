@@ -22,16 +22,16 @@ function HomepageHeader() {
           as="h1"
           className="hero__title mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight sm:text-7xl"
         >
-          Perfect Your Responsive Components
+          Test Your Responsive Components
         </Heading>
         <p className="hero__subtitle mx-auto mt-6 max-w-2xl text-xl tracking-tight">
-          Build and test your responsive designs effortlessly. Interactive
+          Build and test your responsive designs efficiently. Interactive
           preview environment for React developers.
         </p>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/intro"
+            to="/docs/install"
           >
             Get Started
           </Link>
@@ -46,16 +46,15 @@ function PreviewDemo() {
   return (
     <div className="bg-gradient-to-r from-gray-200 to-slate-200 dark:from-gray-800 dark:to-slate-800">
       <div className="container py-8 lg:py-16 mx-auto drop-shadow-md">
-        <ChildPreview
-          config={{
-            darkMode: colorMode === "dark" ? true : false,
-            showToolbar: true,
-            showScale: true,
-            showLabels: true,
-          }}
-        >
-          <StackCard />
-        </ChildPreview>
+        <div className="bg-white dark:bg-gray-900 rounded-lg p-4 lg:p-8">
+          <ChildPreview
+            config={{
+              darkMode: colorMode === "dark" ? true : false,
+            }}
+          >
+            <StackCard />
+          </ChildPreview>
+        </div>
       </div>
     </div>
   );
@@ -66,14 +65,13 @@ export default function Home(): ReactNode {
 
   return (
     <Layout
-      title={`${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />"
+      title="Home"
+      description="Build and test your responsive designs efficiently. Interactive
+          preview environment for React developers."
     >
       <HomepageHeader />
       <PreviewDemo />
-      <main>
-        <HomepageFeatures />
-      </main>
+      <main>{/* <HomepageFeatures /> */}</main>
     </Layout>
   );
 }
