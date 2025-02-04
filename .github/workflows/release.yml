@@ -34,6 +34,9 @@ jobs:
           npm ci
 
       - name: Build
+        env:
+          OMG_PUBLISHABLE_KEY: ${{ secrets.OMG_PUBLISHABLE_KEY }}
+          OMG_SIGNATURE_SECRET: ${{ secrets.OMG_SIGNATURE_SECRET }}
         run: |
           npm run build
 
