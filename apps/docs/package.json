@@ -1,6 +1,6 @@
 {
   "name": "apps-docs",
-  "version": "0.3.0",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -27,7 +27,7 @@
     "@docusaurus/module-type-aliases": "3.7.0",
     "@docusaurus/tsconfig": "3.7.0",
     "@docusaurus/types": "3.7.0",
-    "@locospec/responsive-preview-react": "*",
+    "@locospec/responsive-preview-react": "^0.1.0",
     "@ohimg/ohimg-docusaurus-plugin": "^1.1.0",
     "@ohimg/ohimg-js": "^1.1.4",
     "@rcls/elements": "^0.2.1--canary.457943b.0",
