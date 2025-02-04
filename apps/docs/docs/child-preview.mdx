@@ -8,43 +8,11 @@ import {
 } from "@locospec/responsive-preview-react";
 import StackCard from "@site/src/components/StackCard";
 import { useColorMode } from "@docusaurus/theme-common";
+import ContainerQueryCard from "@site/src/components/ContainerQueryCard";
 
 # ChildPreview
 
 `ChildPreview` enables responsive previewing of React components rendered directly within the preview container.
-
-## Props
-
-```ts
-interface ChildPreviewProps {
-  children?: React.ReactNode; // Component to preview
-  breakpoints?: BreakpointConfig[]; // Custom breakpoint configuration
-  config?: PreviewConfig; // UI configuration
-}
-```
-
-## Example
-
-```tsx
-import { ChildPreview } from '@locospec/responsive-preview-react';
-
-// Basic usage
-<ChildPreview>
-  <YourComponent />
-</ChildPreview>
-
-// With custom config
-<ChildPreview
-  config={{
-    darkMode: true,
-    showToolbar: true,
-    showScale: true,
-    showLabels: true
-  }}
->
-  <YourComponent />
-</ChildPreview>
-```
 
 ## Demo
 
@@ -60,8 +28,78 @@ return (
 >
   <StackCard />
 </ChildPreview>
-
-)
-};
+) };
 
 <PreviewWithColorMode />
+
+## Props
+
+```ts
+interface ChildPreviewProps {
+  children?: React.ReactNode; // Component to preview
+  breakpoints?: BreakpointConfig[]; // Custom breakpoint configuration
+  config?: PreviewConfig; // UI configuration
+}
+```
+
+## Usage
+
+### Import ChildPreview
+
+```tsx
+import { ChildPreview } from "@locospec/responsive-preview-react";
+```
+
+### Use ChildPreview
+
+```tsx
+<ChildPreview>
+  <Child />
+</ChildPreview>
+```
+
+### Custom Configuration
+
+```tsx
+<ChildPreview
+  config={{
+    darkMode: true,
+    showToolbar: true,
+    showScale: true,
+    showLabels: true,
+  }}
+>
+  <YourComponent />
+</ChildPreview>
+```
+
+## Examples
+
+### Disable Scale & Toolbar
+
+export const PreviewWithNoToolbar = () => {
+    const { colorMode, setColorMode } = useColorMode();
+
+return (
+
+<ChildPreview
+  config={{
+    darkMode: colorMode === "dark" ? true : false,
+    showToolbar: false,
+    showScale: false,
+    showLabels: false,
+  }}
+>
+  <StackCard />
+</ChildPreview>
+) };
+
+<PreviewWithNoToolbar />
+
+### Colorful
+
+This is a component which uses container queries to change its background color based on the width of the container.
+
+<ChildPreview>
+  <ContainerQueryCard />
+</ChildPreview>

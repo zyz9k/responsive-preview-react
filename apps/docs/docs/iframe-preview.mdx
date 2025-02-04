@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 import {
   ChildPreview,
   IFramePreview,
@@ -7,6 +11,28 @@ import { useColorMode } from "@docusaurus/theme-common";
 # IFramePreview
 
 `IFramePreview` displays external URLs in a responsive iframe container.
+
+## Demo
+
+Note: In following demo we are supplying `https://ui.shadcn.com/view/styles/new-york/sidebar-07` which is one of the blocks on shadcn.
+
+export const PreviewWithColorMode = () => {
+    const { colorMode, setColorMode } = useColorMode();
+
+return (
+
+<IFramePreview
+  srcUrl="https://ui.shadcn.com/view/styles/new-york/sidebar-07"
+  height={500}
+  config={{
+    darkMode: colorMode === "dark" ? true : false,
+  }}
+/>
+
+)
+};
+
+<PreviewWithColorMode />
 
 ## Props
 
@@ -19,41 +45,56 @@ interface IFramePreviewProps {
 }
 ```
 
-## Example
+## Usage
+
+### Import IFramePreview
 
 ```tsx
-import { IFramePreview } from '@locospec/responsive-preview-react';
+import { IFramePreview } from "@locospec/responsive-preview-react";
+```
 
-// Basic usage
-<IFramePreview srcUrl="https://example.com" />
+### Use IFramePreview
 
-// With custom height and config
+```tsx
+<IFramePreview srcUrl="//" />
+```
+
+### Custom Configuration
+
+```tsx
 <IFramePreview
-  srcUrl="https://example.com"
-  height={800}
+  srcUrl="https://ui.shadcn.com/view/styles/new-york/sidebar-07"
+  height={500}
   config={{
     darkMode: true,
-    showToolbar: false
+    showToolbar: true,
+    showScale: true,
+    showLabels: true,
   }}
 />
 ```
 
-## Demo
+## Examples
 
-export const PreviewWithColorMode = () => {
+### Disable Scale & Toolbar
+
+export const PreviewWithNoToolbar = () => {
     const { colorMode, setColorMode } = useColorMode();
 
 return (
 
 <IFramePreview
-  srcUrl="https://tailwindcss.com"
+  srcUrl="https://ui.shadcn.com/view/styles/new-york/sidebar-07"
   height={500}
   config={{
     darkMode: colorMode === "dark" ? true : false,
+    showToolbar: false,
+    showScale: false,
+    showLabels: false,
   }}
 />
 
 )
 };
 
-<PreviewWithColorMode />
+<PreviewWithNoToolbar />

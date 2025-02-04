@@ -31,7 +31,7 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/intro"
+            to="/docs/install"
           >
             Get Started
           </Link>
@@ -65,15 +65,13 @@ export default function Home(): ReactNode {
 
   return (
     <Layout
-      title="Responsive Preview Component for React"
+      title="Home"
       description="Build and test your responsive designs efficiently. Interactive
           preview environment for React developers."
     >
       <HomepageHeader />
       <PreviewDemo />
-      <main>
-        <HomepageFeatures />
-      </main>
+      <main>{/* <HomepageFeatures /> */}</main>
     </Layout>
   );
 }
