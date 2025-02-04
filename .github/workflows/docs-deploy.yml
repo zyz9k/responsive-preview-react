@@ -35,6 +35,9 @@ jobs:
             docs-npm-deps-${{ hashFiles('package-lock.json') }}
 
       - name: Build docs
+        env:
+          OMG_PUBLISHABLE_KEY: ${{ secrets.OMG_PUBLISHABLE_KEY }}
+          OMG_SIGNATURE_SECRET: ${{ secrets.OMG_SIGNATURE_SECRET }}
         run: |
           npm run package:build
           npm run docs:build
