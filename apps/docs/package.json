@@ -28,6 +28,8 @@
     "@docusaurus/tsconfig": "3.7.0",
     "@docusaurus/types": "3.7.0",
     "@locospec/responsive-preview-react": "*",
+    "@ohimg/ohimg-docusaurus-plugin": "^1.1.0",
+    "@ohimg/ohimg-js": "^1.1.4",
     "@rcls/elements": "^0.2.1--canary.457943b.0",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/typography": "^0.5.16",

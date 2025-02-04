@@ -1,6 +1,7 @@
 import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
+import "dotenv/config";
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -43,6 +44,23 @@ const config: Config = {
 
   plugins: [
     "docusaurus-tailwindcss-loader",
+    [
+      "@ohimg/ohimg-docusaurus-plugin",
+      {
+        enabledPlugins: [
+          "docusaurus-plugin-content-docs",
+          "docusaurus-plugin-content-pages",
+          "docusaurus-plugin-content-blog",
+        ],
+        debug: false,
+        publishableKey: process.env.OMG_PUBLISHABLE_KEY,
+        signatureSecret: process.env.OMG_SIGNATURE_SECRET,
+        imageOptions: {
+          logoSrc:
+            "https://responsive-preview-react.locospec.com/img/rpr-dark-logo.svg",
+        },
+      },
+    ],
     function () {
       return {
         name: "custom-watch-plugin",
@@ -88,11 +106,11 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: "img/docusaurus-social-card.jpg",
+    image: "img/social-card.png",
     navbar: {
       title: "Responsive Preview for React",
       logo: {
-        alt: "My Site Logo",
+        alt: "Responsive Preview",
         srcDark: "img/rpr-dark-logo.svg",
         src: "img/rpr-light-logo.svg",
       },
