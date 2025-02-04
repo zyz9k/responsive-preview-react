@@ -10,7 +10,7 @@ const BASE_URL =
     : "/";
 
 const config: Config = {
-  tagline: "Preview your responsive designs with ease and power",
+  tagline: "Test your responsive designs with ease and power",
   title: "Responsive Preview Component for React",
   favicon: "img/favicon.ico",
 

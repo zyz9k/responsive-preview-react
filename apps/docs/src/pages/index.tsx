@@ -22,10 +22,10 @@ function HomepageHeader() {
           as="h1"
           className="hero__title mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight sm:text-7xl"
         >
-          Perfect Your Responsive Components
+          Test Your Responsive Components
         </Heading>
         <p className="hero__subtitle mx-auto mt-6 max-w-2xl text-xl tracking-tight">
-          Build and test your responsive designs effortlessly. Interactive
+          Build and test your responsive designs efficiently. Interactive
           preview environment for React developers.
         </p>
         <div className={styles.buttons}>
@@ -65,8 +65,9 @@ export default function Home(): ReactNode {
 
   return (
     <Layout
-      title={`${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />"
+      title="Responsive Preview Component for React"
+      description="Build and test your responsive designs efficiently. Interactive
+          preview environment for React developers."
     >
       <HomepageHeader />
       <PreviewDemo />
