@@ -24,7 +24,7 @@ const config: Config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "rjvim", // Usually your GitHub org/user name.
+  organizationName: "locospec", // Usually your GitHub org/user name.
   projectName: "responsive-preview-react", // Usually your repo name.
 
   onBrokenLinks: "throw",
@@ -123,7 +123,7 @@ const config: Config = {
         },
         { to: "/blog", label: "Blog", position: "left" },
         {
-          href: "https://github.com/rjvim/responsive-preview-react",
+          href: "https://github.com/locospec/responsive-preview-react",
           label: "GitHub",
           position: "right",
         },
@@ -159,7 +159,7 @@ const config: Config = {
             },
             {
               label: "GitHub",
-              href: "https://github.com/rjvim/responsive-preview-react",
+              href: "https://github.com/locospec/responsive-preview-react",
             },
           ],
         },
