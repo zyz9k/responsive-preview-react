@@ -4,8 +4,16 @@ sidebar_position: 1
 
 # Installation
 
+**Run the following command to install the package:**
+
 ```bash
 npm install @locospec/responsive-preview-react
+```
+
+**Import the styles in your project:**
+
+```
+@import "@locospec/responsive-preview-react/styles.css";
 ```
 
 Note: You can also use yarn, pnpm etc.,
