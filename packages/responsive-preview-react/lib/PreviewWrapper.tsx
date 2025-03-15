@@ -126,7 +126,7 @@ export function PreviewWrapper({
               <Settings
                 config={config}
                 onChange={(newConfig) => {
-                  console.log("newConfig", newConfig);
+                 
                   setConfig(newConfig);
                 }}
                 rprRef={rprRef}
