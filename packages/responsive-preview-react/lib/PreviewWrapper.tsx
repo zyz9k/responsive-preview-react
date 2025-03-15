@@ -64,7 +64,6 @@ export function PreviewWrapper({
   }, []);
 
   React.useEffect(() => {
-    console.log("initialConfig", initialConfig);
     setConfig(initialConfig);
   }, [initialConfig]);
 
